@@ -21,7 +21,6 @@ const GoogleLogin = ({ redirectTo, label }) => {
 
       // Save user data to database
       await saveUserDataToDB(userData);
-      console.log(userData);
 
       notifySuccess('Successfully Logged In!');
       navigate(redirectTo);

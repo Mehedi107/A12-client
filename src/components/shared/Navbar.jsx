@@ -19,7 +19,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to={'items'}>Products</NavLink>
+        <NavLink to={'products'}>Products</NavLink>
       </li>
       {!user && (
         <li>
@@ -47,7 +47,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[10] mt-3 w-52 p-2 shadow"
           >
             <p className="text-center font-semibold text-lg">
               {user?.displayName && 'Hi! ' + user.displayName}

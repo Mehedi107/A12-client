@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import axios from 'axios';
 import LoadingSpinner from '../utils/LoadingSpinner';
+import useAxiosPublic from '../hooks/useAxiosPublic';
 
-const ItemDetails = () => {
+const ProductDetails = () => {
   const { id } = useParams();
-  const [item, setItem] = useState({});
+  const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
     const getItemDetails = async () => {
       try {
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_SERVER_URL}/item/details/${id}`
-        );
-        setItem(data);
+        const { data } = await axiosPublic.get(`product/details/${id}`);
+        setProduct(data);
         setError(null); // Clear any previous errors
       } catch (err) {
         console.error(err);
@@ -26,7 +25,7 @@ const ItemDetails = () => {
     };
 
     if (id) getItemDetails();
-  }, [id]); // Correct dependency array
+  }, [id, axiosPublic]); // Correct dependency array
 
   if (loading) {
     return <LoadingSpinner />;
@@ -36,17 +35,24 @@ const ItemDetails = () => {
     return <p className="text-center text-red-500 my-5">{error}</p>;
   }
 
+  console.log(product?.image);
+
   return (
-    <div>
+    <div className="min-h-screen items-center">
       <h2 className="text-center text-3xl my-5">Item Details</h2>
 
       <div className="card lg:card-side bg-base-100 shadow-xl">
         <figure>
-          <img src={item?.image} alt={item?.title || 'Item Image'} />
+          <img
+            src="https://placehold.co/400"
+            alt={product?.name || 'Item Image'}
+          />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{item?.title || 'No Title Available'}</h2>
-          <p>{item?.description || 'No Description Available'}</p>
+          <h2 className="card-title">
+            {product?.name || 'No Title Available'}
+          </h2>
+          <p>{product?.tags || 'No Description Available'}</p>
           <div className="card-actions justify-end">
             <button className="btn btn-primary">Take Action</button>
           </div>
@@ -56,4 +62,4 @@ const ItemDetails = () => {
   );
 };
 
-export default ItemDetails;
+export default ProductDetails;
