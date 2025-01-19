@@ -19,59 +19,105 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to={'items'}>Items</NavLink>
+        <NavLink to={'items'}>Products</NavLink>
       </li>
-      <li>
-        <NavLink to={'login'}>Login</NavLink>
-      </li>
-      <li>
-        <NavLink to={'register'}>Sign Up</NavLink>
-      </li>
-      <li>
-        <NavLink to={'dashboard'}>Dashboard</NavLink>
-      </li>
+      {!user && (
+        <li>
+          <NavLink to={'login'}>Login</NavLink>
+        </li>
+      )}
+    </>
+  );
+
+  const userProfile = (
+    <>
+      {user && (
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle avatar"
+          >
+            <div className="w-10 rounded-full">
+              <img
+                alt="Tailwind CSS Navbar component"
+                src={user?.photoURL || avatar}
+              />
+            </div>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+          >
+            <p className="text-center font-semibold text-lg">
+              {user?.displayName && 'Hi! ' + user.displayName}
+            </p>
+            <div className="divider m-0"></div>
+            <li>
+              <NavLink to={'dashboard'}>Dashboard</NavLink>
+            </li>
+            <li>
+              <Link onClick={signOutUser}>Logout</Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   );
   return (
     <nav className="navbar bg-base-300">
+      {/* Nav Start */}
       <div className="navbar-start">
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        {/* Avatar */}
+        <div className="md:hidden">
+          {user && (
+            <div className="dropdown">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src={user?.photoURL || avatar}
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              >
+                <p className="text-center font-semibold text-lg">
+                  {user?.displayName && 'Hi! ' + user.displayName}
+                </p>
+                <div className="divider m-0"></div>
+                <li>
+                  <NavLink to={'dashboard'}>Dashboard</NavLink>
+                </li>
+                <li>
+                  <Link onClick={signOutUser}>Logout</Link>
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <a href="" className="hidden md:block text-xl">
+          ProdVent
+        </a>
       </div>
-      <div className="navbar-center hidden md:flex">
-        <ul className="menu menu-horizontal px-1">{navLinks}</ul>
+      {/* Nav Center */}
+      <div className="navbar-center ">
+        <a href="" className="md:hidden text-xl">
+          ProdVent
+        </a>
+        <ul className="hidden md:flex menu menu-horizontal px-1">{navLinks}</ul>
       </div>
+      {/* Nav End */}
       <div className="navbar-end items-end">
         {/* Avatar */}
-        {user && (
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src={user?.photoURL || avatar}
-                />
-              </div>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <Link className="justify-between">Profile</Link>
-              </li>
-              <li>
-                <Link>Settings</Link>
-              </li>
-              <li>
-                <Link onClick={signOutUser}>Logout</Link>
-              </li>
-            </ul>
-          </div>
-        )}
+        <div className="hidden md:block">{userProfile}</div>
 
         {/* Mobile navigation */}
         <div className="drawer drawer-end w-auto md:hidden">

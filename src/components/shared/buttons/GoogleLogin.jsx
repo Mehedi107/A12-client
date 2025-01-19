@@ -16,10 +16,12 @@ const GoogleLogin = ({ redirectTo, label }) => {
         name: res.user.displayName,
         email: res.user.email,
         photo: res.user.photoURL,
+        role: 'user',
       };
 
       // Save user data to database
       await saveUserDataToDB(userData);
+      console.log(userData);
 
       notifySuccess('Successfully Logged In!');
       navigate(redirectTo);

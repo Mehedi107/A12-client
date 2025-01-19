@@ -32,20 +32,8 @@ const Login = () => {
       });
   };
 
-  // const handleGoogleLogin = () => {
-  //   googleLogin()
-  //     .then(() => {
-  //       notifySuccess('Successfully Logged In !');
-  //       navigate(redirectTo);
-  //     })
-  //     .catch(error => {
-  //       const errorMessage = error.message;
-  //       notifyError(errorMessage);
-  //     });
-  // };
-
   return (
-    <div className="flex justify-center items-center min-h-100vh ">
+    <div className="flex justify-center items-center min-h-screen">
       <HelmetAsync title="Login"></HelmetAsync>
 
       <div className="w-full max-w-md  m-5 p-8 rounded-lg shadow-lg ">
