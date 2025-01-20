@@ -32,7 +32,7 @@ const Navbar = () => {
   const userProfile = (
     <>
       {user && (
-        <div className="dropdown dropdown-end">
+        <div className="dropdown md:dropdown-end">
           <div
             tabIndex={0}
             role="button"
@@ -64,44 +64,13 @@ const Navbar = () => {
       )}
     </>
   );
+
   return (
     <nav className="navbar bg-base-300">
       {/* Nav Start */}
       <div className="navbar-start">
         {/* Avatar */}
-        <div className="md:hidden">
-          {user && (
-            <div className="dropdown">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src={user?.photoURL || avatar}
-                  />
-                </div>
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-              >
-                <p className="text-center font-semibold text-lg">
-                  {user?.displayName && 'Hi! ' + user.displayName}
-                </p>
-                <div className="divider m-0"></div>
-                <li>
-                  <NavLink to={'dashboard'}>Dashboard</NavLink>
-                </li>
-                <li>
-                  <Link onClick={signOutUser}>Logout</Link>
-                </li>
-              </ul>
-            </div>
-          )}
-        </div>
+        <div className="md:hidden">{userProfile}</div>
 
         <a href="" className="hidden md:block text-xl">
           ProdVent

@@ -80,7 +80,7 @@ const Login = () => {
             </p>
           </div>
 
-          <button type="submit" className="btn text-lg btn-block mt-4 ">
+          <button type="submit" className="btn text-base btn-block mt-4 ">
             {loading ? (
               <span className="loading loading-spinner loading-md"></span>
             ) : (

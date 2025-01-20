@@ -1,64 +1,46 @@
-import { useNavigate } from 'react-router';
-import useAxiosPublic from '../hooks/useAxiosPublic';
-import { BsTriangle } from 'react-icons/bs';
-import useAuth from '../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../hooks/useAxiosPublic';
+import LoadingSpinner from '../utils/LoadingSpinner';
+import { BsTriangle } from 'react-icons/bs';
+import { useNavigate } from 'react-router';
+import useAuth from '../hooks/useAuth';
 import { handleUpvote } from '../utils/handleUpVote';
 
-const FeaturedProducts = () => {
+const ProductAll = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const { user } = useAuth();
-
-  const fetchFeaturedProducts = async () => {
+  const fetchAllProducts = async () => {
     try {
-      const res = await axiosPublic.get('/products');
+      const res = await axiosPublic.get('/all-products');
       return res.data;
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error('Error fetching trending products:', error);
     }
   };
-
-  const { data: products = [], refetch } = useQuery({
+  const {
+    data: products = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
     queryKey: ['products'],
-    queryFn: fetchFeaturedProducts,
+    queryFn: fetchAllProducts,
   });
 
-  return (
-    <section className="featured-products py-10">
-      <h2 className="text-3xl font-bold text-center mb-6">Featured Products</h2>
-      <div className="grid items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        {/* when fetching product */}
-        {products.length === 0 && (
-          <>
-            <div className="flex flex-col gap-4">
-              <div className="skeleton h-32 w-full"></div>
-              <div className="skeleton h-4 w-28"></div>
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
-            </div>
-            <div className="flex flex-col gap-4">
-              <div className="skeleton h-32 w-full"></div>
-              <div className="skeleton h-4 w-28"></div>
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
-            </div>
-            <div className="flex flex-col gap-4">
-              <div className="skeleton h-32 w-full"></div>
-              <div className="skeleton h-4 w-28"></div>
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
-            </div>
-            <div className="flex flex-col gap-4">
-              <div className="skeleton h-32 w-full"></div>
-              <div className="skeleton h-4 w-28"></div>
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
-            </div>
-          </>
-        )}
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
-        {/* When product loaded successfully */}
+  if (isError) {
+    return <div>Error fetching products</div>;
+  }
+
+  return (
+    <div className="py-10">
+      <h2 className="font-semibold text-3xl mb-5 text-center">All Products</h2>
+      {/* Products grid */}
+      <div className="grid items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {products.map(product => (
           <div
             key={product._id}
@@ -100,8 +82,8 @@ const FeaturedProducts = () => {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 
-export default FeaturedProducts;
+export default ProductAll;

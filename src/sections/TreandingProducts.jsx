@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import { BsTriangle } from 'react-icons/bs';
 import useAuth from '../hooks/useAuth';
-import { notifyError, notifySuccess } from '../utils/notification';
+import { handleUpvote } from '../utils/handleUpVote';
 
 const TrendingProducts = () => {
   const axiosPublic = useAxiosPublic();
@@ -14,12 +14,9 @@ const TrendingProducts = () => {
   const fetchTrendingProducts = async () => {
     try {
       const res = await axiosPublic.get('/trending');
-      // Sort products by vote count in descending order and return the top 6
-      //   return res.data.sort((a, b) => b.vote - a.vote).slice(0, 6);
       return res.data;
     } catch (error) {
       console.error('Error fetching trending products:', error);
-      throw new Error('Failed to fetch trending products.');
     }
   };
 
@@ -33,30 +30,30 @@ const TrendingProducts = () => {
     queryFn: fetchTrendingProducts,
   });
 
-  const handleUpvote = async productId => {
-    if (!user) {
-      notifyError('Please login to upvote a product');
-      navigate('/login');
-      return;
-    }
+  // const handleUpvote = async productId => {
+  //   if (!user) {
+  //     notifyError('Please login to upvote a product');
+  //     navigate('/login');
+  //     return;
+  //   }
 
-    try {
-      const res = await axiosPublic.patch(`/product/upvote/${productId}`, {
-        user: user?.email,
-      });
-      if (res.data === 'already liked') {
-        notifyError('You have already upvoted this product');
-        return;
-      }
+  //   try {
+  //     const res = await axiosPublic.patch(`/product/upvote/${productId}`, {
+  //       user: user?.email,
+  //     });
+  //     if (res.data === 'already liked') {
+  //       notifyError('You have already upvoted this product');
+  //       return;
+  //     }
 
-      if (res.data.modifiedCount === 1) {
-        notifySuccess('You have successfully upvoted this product');
-        refetch();
-      }
-    } catch (error) {
-      console.error('Error upvoting product:', error);
-    }
-  };
+  //     if (res.data.modifiedCount === 1) {
+  //       notifySuccess('You have successfully upvoted this product');
+  //       refetch();
+  //     }
+  //   } catch (error) {
+  //     console.error('Error upvoting product:', error);
+  //   }
+  // };
 
   if (isLoading) {
     return <p className="text-center my-5">Loading Trending Products...</p>;
@@ -92,7 +89,15 @@ const TrendingProducts = () => {
             </p>
             <div className="flex items-center justify-between mt-4">
               <button
-                onClick={() => handleUpvote(product._id)}
+                onClick={() =>
+                  handleUpvote(
+                    product._id,
+                    user,
+                    navigate,
+                    axiosPublic,
+                    refetch
+                  )
+                }
                 className="upvote-btn flex items-center gap-2 px-4 py-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200"
               >
                 <BsTriangle />
