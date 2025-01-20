@@ -54,7 +54,7 @@ const Navbar = () => {
             </p>
             <div className="divider m-0"></div>
             <li>
-              <NavLink to={'dashboard'}>Dashboard</NavLink>
+              <NavLink to={'dashboard/my-profile'}>Dashboard</NavLink>
             </li>
             <li>
               <Link onClick={signOutUser}>Logout</Link>

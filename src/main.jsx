@@ -10,12 +10,14 @@ import Error from './pages/Error.jsx';
 import Home from './pages/Home.jsx';
 import AuthProvider from './provider/AuthProvider.jsx';
 import { Toaster } from 'react-hot-toast';
-import Items from './pages/Items.jsx';
 import ItemDetails from './pages/ProductDetails.jsx';
 import PrivateRoute from './routes/PrivateRoute.jsx';
-import Dashboard from './pages/Dashboard.jsx';
+import Dashboard from './pages/dashboard/Dashboard.jsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ProductAll from './pages/ProductAll.jsx';
+import MyProfile from './pages/dashboard/MyProfile.jsx';
+import AddProduct from './pages/dashboard/AddProduct.jsx';
+import MyProduct from './pages/dashboard/MyProduct.jsx';
 
 const queryClient = new QueryClient();
 
@@ -26,7 +28,7 @@ createRoot(document.getElementById('root')).render(
         <HelmetProvider>
           <BrowserRouter>
             <Routes>
-              <Route element={<App />} errorElement={<Error />}>
+              <Route path="/" element={<App />}>
                 <Route index element={<Home />} />
                 <Route path="products" element={<ProductAll />} />
                 <Route
@@ -41,7 +43,20 @@ createRoot(document.getElementById('root')).render(
 
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Register />} />
-              <Route path="dashboard" element={<Dashboard />} />
+
+              <Route
+                path="dashboard"
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              >
+                <Route index path="my-profile" element={<MyProfile />} />
+                <Route path="add-product" element={<AddProduct />} />
+                <Route path="my-product" element={<MyProduct />} />
+              </Route>
+              <Route path="*" element={<Error />} />
             </Routes>
             <Toaster />
           </BrowserRouter>

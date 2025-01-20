@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from 'react-router';
 import HelmetAsync from '../components/shared/HelmetAsync';
 import { notifyError, notifySuccess } from '../utils/notification';
 import GoogleLogin from '../components/shared/buttons/GoogleLogin';
 import useAuth from '../hooks/useAuth';
 import { saveUserDataToDB } from '../utils/saveUserDataToDB';
 import { verifyPassword } from '../utils/verifyPassword';
+import { Link, useLocation, useNavigate } from 'react-router';
 
 const Register = () => {
   const [toggle, setToggle] = useState(false);
@@ -23,7 +23,7 @@ const Register = () => {
     const email = form.email.value;
     const photo = form.photo.value;
     const password = form.password.value;
-    const formData = { name, email, photo, password };
+    const formData = { name, email, photo, password, role: 'user' };
 
     try {
       verifyPassword(password);
@@ -38,6 +38,7 @@ const Register = () => {
       navigate(redirectTo);
     } catch (error) {
       notifyError(error.message);
+      return;
     } finally {
       setLoading(false);
     }
