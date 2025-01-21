@@ -1,4 +1,6 @@
-const Modal = () => {
+import PropTypes from 'prop-types';
+
+const Modal = ({ handlePaymentSuccess }) => {
   return (
     <>
       <dialog id="my_modal_3" className="modal">
@@ -9,12 +11,24 @@ const Modal = () => {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+          <div className="payment-form text-center p-6">
+            <h3 className="text-2xl font-semibold mb-4">Payment Checkout</h3>
+            <p className="mb-6">You are subscribing for 49.99.</p>
+            <button
+              onClick={handlePaymentSuccess}
+              className="pay-btn px-6 py-3 text-white bg-green-500 hover:bg-green-600 rounded-lg text-lg"
+            >
+              Pay Now
+            </button>
+          </div>
         </div>
       </dialog>
     </>
   );
+};
+
+Modal.propTypes = {
+  handlePaymentSuccess: PropTypes.func.isRequired,
 };
 
 export default Modal;
