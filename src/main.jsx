@@ -18,6 +18,10 @@ import ProductAll from './pages/ProductAll.jsx';
 import MyProfile from './pages/dashboard/MyProfile.jsx';
 import AddProduct from './pages/dashboard/AddProduct.jsx';
 import MyProduct from './pages/dashboard/MyProduct.jsx';
+import UpdateProduct from './pages/dashboard/UpdateProduct.jsx';
+import ModeratorRoute from './routes/ModeratorRoute.jsx';
+import ProductReview from './pages/dashboard/ProductReview.jsx';
+import ReportedContent from './pages/dashboard/ReportedContent.jsx';
 
 const queryClient = new QueryClient();
 
@@ -55,6 +59,9 @@ createRoot(document.getElementById('root')).render(
                 <Route index path="my-profile" element={<MyProfile />} />
                 <Route path="add-product" element={<AddProduct />} />
                 <Route path="my-product" element={<MyProduct />} />
+                <Route path="product-review" element={<ProductReview />} />
+                <Route path="reported-content" element={<ReportedContent />} />
+                <Route path="update/:id" element={<UpdateProduct />} />
               </Route>
               <Route path="*" element={<Error />} />
             </Routes>

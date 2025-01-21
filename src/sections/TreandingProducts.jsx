@@ -67,7 +67,7 @@ const TrendingProducts = () => {
     );
   }
 
-  console.log(products);
+  // console.log(products);
 
   return (
     <section className="trending-products py-10">

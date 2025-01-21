@@ -20,7 +20,7 @@ const AddProduct = () => {
     const userPhoto = user.photoURL;
     const externalLink = form.externalLink.value;
     const tags = form.tags.value;
-    const formattedTags = tags.split(' ');
+    const formattedTags = tags.split(',');
 
     const formData = {
       productName,
@@ -44,9 +44,10 @@ const AddProduct = () => {
         navigate('/dashboard/my-product');
       }
     } catch (error) {
-      console.log('Error adding product');
+      console.log('Error adding product', error);
     }
   };
+  console.log(user);
 
   return (
     <div>
@@ -74,7 +75,7 @@ const AddProduct = () => {
             <input
               type="url"
               name="productImage"
-              className="file-input file-input-bordered w-full"
+              className="input input-bordered w-full"
               required
             />
           </div>
@@ -127,7 +128,7 @@ const AddProduct = () => {
             <label className="label font-semibold">Tags</label>
             <input
               type="text"
-              placeholder="Enter tags with space"
+              placeholder="Enter tags with commas"
               className="input input-bordered w-full"
               name="tags"
             />

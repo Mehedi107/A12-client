@@ -96,7 +96,7 @@ const MyProduct = () => {
                     <td className="space-x-2">
                       {/* Update Button */}
                       <Link
-                        to={`/update/${product.id}`}
+                        to={`/dashboard/update/${product._id}`}
                         className="btn btn-sm btn-primary"
                       >
                         Update

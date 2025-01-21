@@ -143,7 +143,11 @@ const ProductDetails = () => {
       {/* Reviews Section */}
       <div className="reviews shadow-lg p-6 rounded-md my-6">
         <h3 className="text-2xl font-semibold mb-5">User Reviews</h3>
-        <ReviewSlide reviews={reviews} />
+        {reviews ? (
+          <ReviewSlide reviews={reviews} />
+        ) : (
+          'No reviews available for this product'
+        )}
       </div>
 
       {/* Post Review Section */}
