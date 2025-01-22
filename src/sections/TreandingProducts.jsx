@@ -79,9 +79,9 @@ const TrendingProducts = () => {
             className="product-card bg-white rounded-lg shadow-lg p-4"
           >
             <img
-              src={'https://placehold.co/400'}
+              src={product.image || 'https://placehold.co/400'}
               alt={product.name}
-              className="h-40 w-full object-cover rounded-md"
+              className="w-20 object-cover rounded-md"
             />
             <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
             <p className="text-sm text-gray-600 mt-2">
@@ -105,7 +105,7 @@ const TrendingProducts = () => {
               </button>
               <button
                 onClick={() => navigate(`/product/${product._id}`)}
-                className="details-btn px-4 py-2 rounded bg-gray-800 text-white hover:bg-gray-900"
+                className="details-btn px-4 py-2 rounded btn btn-neutral"
               >
                 View Details
               </button>
@@ -116,7 +116,7 @@ const TrendingProducts = () => {
       <div className="text-center mt-6">
         <button
           onClick={() => navigate('/products')}
-          className="btn btn-primary px-6 py-3 rounded bg-blue-600 text-white hover:bg-blue-700"
+          className="btn btn-neutral btn-wide px-6 py-3 rounded "
         >
           Show All Products
         </button>

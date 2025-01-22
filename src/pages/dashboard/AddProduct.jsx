@@ -71,7 +71,7 @@ const AddProduct = () => {
 
           {/* Product Image */}
           <div className="form-control">
-            <label className="label font-semibold">Product Image</label>
+            <label className="label font-semibold">Product Image URL</label>
             <input
               type="url"
               name="productImage"
@@ -131,6 +131,7 @@ const AddProduct = () => {
               placeholder="Enter tags with commas"
               className="input input-bordered w-full"
               name="tags"
+              required
             />
           </div>
 
@@ -142,6 +143,7 @@ const AddProduct = () => {
               placeholder="Enter external link (optional)"
               className="input input-bordered w-full"
               name="externalLink"
+              required
             />
           </div>
 

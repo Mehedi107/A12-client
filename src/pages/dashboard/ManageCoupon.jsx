@@ -35,6 +35,7 @@ const ManageCoupon = () => {
 
   const handleAddCoupon = async e => {
     e.preventDefault();
+    const form = e.target;
 
     try {
       const res = await axiosSecure.post('/add-coupon', { formData });
@@ -42,6 +43,7 @@ const ManageCoupon = () => {
       if (res.data.insertedId) {
         notifySuccess('Coupon added successfully!');
         refetch();
+        form.reset();
       }
     } catch (error) {
       notifyError(error);
@@ -128,11 +130,18 @@ const ManageCoupon = () => {
         </button>
       </form>
 
-      {/* Coupon List */}
-      {isLoading && <p>Loading coupons...</p>}
-      {isError && <p>Failed to load coupons.</p>}
-
+      <h2 className="text-2xl my-10 font-bold">Coupons</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Coupon List */}
+        {isLoading && <p>Loading coupons...</p>}
+        {isError && <p>Failed to load coupons.</p>}
+        {coupons.length === 0 ? (
+          <>
+            <p>No Coupon available...</p>
+          </>
+        ) : (
+          ''
+        )}
         {coupons.map(coupon => (
           <div
             key={coupon._id}

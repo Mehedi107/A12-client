@@ -65,9 +65,9 @@ const FeaturedProducts = () => {
             className="product-card bg-white rounded-lg shadow-lg p-4"
           >
             <img
-              src="https://placehold.co/400"
+              src={product.image || 'https://placehold.co/400'}
               alt={product.name}
-              className="h-40 w-full object-cover rounded-md"
+              className="w-20 object-cover rounded-md"
             />
             <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
             <p className="text-sm text-gray-600 mt-2">
@@ -91,7 +91,7 @@ const FeaturedProducts = () => {
               </button>
               <button
                 onClick={() => navigate(`/product/${product._id}`)}
-                className="details-btn px-4 py-2 rounded bg-gray-800 text-white hover:bg-gray-900"
+                className="details-btn px-4 py-2 rounded btn btn-neutral"
               >
                 View Details
               </button>

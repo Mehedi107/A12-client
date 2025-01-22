@@ -24,15 +24,12 @@ const ReviewSlide = ({ reviews }) => {
         modules={[Navigation, Pagination, Autoplay]}
         className="mySwiper"
       >
-        {reviews.map((review, i) => (
-          <SwiperSlide key={i}>
-            <div
-              key={i}
-              className="review-card flex flex-col items-center text-center gap-4 p-10 pb-20 border border-gray-200 rounded-lg shadow-lg bg-white"
-            >
+        {reviews.map(review => (
+          <SwiperSlide key={review._id}>
+            <div className="review-card flex flex-col items-center text-center gap-4 p-10 pb-20 border border-gray-200 rounded-lg shadow-lg bg-white">
               <img
                 className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
-                src="https://placehold.co/400"
+                src={review?.photo || 'https://placehold.co/400'}
                 alt={review?.reviewerName || review?.name}
               />
               <h4 className="text-xl font-bold text-gray-800">

@@ -51,6 +51,7 @@ const ProductDetails = () => {
     queryKey: ['reviews', id],
     queryFn: fetchReviews,
   });
+  console.log(reviews);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -93,10 +94,12 @@ const ProductDetails = () => {
       photo,
       email: user?.email,
     };
-    try {
-      const res = await axiosPublic.patch(`/product/${id}/reviews`, formData);
 
-      if (res.data.modifiedCount === 1) {
+    // console.log(formData);
+    try {
+      const res = await axiosPublic.post(`/product/${id}/reviews`, formData);
+      console.log(res);
+      if (res.data.insertedId) {
         notifySuccess('You review has been submitted successfully!');
       }
 

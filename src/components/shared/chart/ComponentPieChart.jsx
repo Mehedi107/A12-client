@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
-const ComponentPieChart = ({ dataSet }) => {
-  const { products, users, reviews } = dataSet;
+const ComponentPieChart = ({ pieData }) => {
+  const { products, users, reviews } = pieData;
 
   // Data for the pie chart
   const data = [
@@ -69,7 +69,7 @@ const ComponentPieChart = ({ dataSet }) => {
 };
 
 ComponentPieChart.propTypes = {
-  dataSet: PropTypes.node.isRequired,
+  pieData: PropTypes.object.isRequired,
 };
 
 export default ComponentPieChart;

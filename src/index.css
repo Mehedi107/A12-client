@@ -9,3 +9,7 @@
 .chart-container .recharts-wrapper {
   margin: 0 auto 0 auto;
 }
+
+/* .btn {
+  @apply rounded-xl;
+} */

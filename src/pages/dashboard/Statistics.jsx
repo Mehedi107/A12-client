@@ -25,7 +25,6 @@ const Statistics = () => {
   const fetchAllReviews = async () => {
     try {
       const res = await axiosPublic.get('/reviews');
-      console.log(res);
       return res.data;
     } catch (error) {
       console.log(error);
@@ -63,7 +62,7 @@ const Statistics = () => {
           <p className="text-center text-xl font-medium">
             Total Products: {products.length}
           </p>
-          <ComponentPieChart dataSet={data} />
+          <ComponentPieChart pieData={data} />
         </div>
       </div>
     </div>

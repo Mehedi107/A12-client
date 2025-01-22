@@ -70,9 +70,9 @@ const Navbar = () => {
         {/* Avatar */}
         <div className="md:hidden">{userProfile}</div>
 
-        <a href="" className="hidden md:block text-xl">
+        <Link to="/" className="hidden md:block text-xl">
           ProdVent
-        </a>
+        </Link>
       </div>
       {/* Nav Center */}
       <div className="navbar-center ">

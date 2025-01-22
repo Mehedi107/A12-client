@@ -85,9 +85,9 @@ const ProductAll = () => {
               className="product-card bg-white rounded-lg shadow-lg p-4"
             >
               <img
-                src="https://placehold.co/400"
+                src={product.image || 'https://placehold.co/400'}
                 alt={product.name}
-                className="h-40 w-full object-cover rounded-md"
+                className="w-20 rounded-md"
               />
               <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
               <p className="text-sm text-gray-600 mt-2">
