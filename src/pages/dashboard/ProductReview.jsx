@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 import { notifyError, notifySuccess } from '../../utils/notification';
 
 const ProductReview = () => {
-  //   const [productList, setProductList] = useState(products);
   const axiosPublic = useAxiosPublic();
 
   const fetchPendingProducts = async () => {
@@ -21,8 +20,6 @@ const ProductReview = () => {
     const statusOrder = { pending: 1, rejected: 2, accepted: 3 };
     return statusOrder[a.status] - statusOrder[b.status];
   });
-
-  console.log(sortedProducts);
 
   const handleFeatured = async id => {
     try {

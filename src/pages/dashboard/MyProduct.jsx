@@ -1,18 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 import HelmetAsync from '../../components/shared/HelmetAsync';
 import useAuth from '../../hooks/useAuth';
-import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import { notifyError } from '../../utils/notification';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const MyProduct = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
   const deleteProduct = async (productId, refetch) => {
     try {
-      const res = await axiosPublic.delete(`/delete-product/${productId}`);
+      const res = await axiosSecure.delete(`/delete-product/${productId}`);
       console.log(res.data);
       if (res.data.deletedCount) {
         refetch();
@@ -26,7 +26,7 @@ const MyProduct = () => {
 
   const fetchProductByEmail = async () => {
     try {
-      const res = await axiosPublic.get(`/my-product/${user?.email}`);
+      const res = await axiosSecure.get(`/my-product/${user?.email}`);
       return res.data;
     } catch (error) {
       console.log(error);

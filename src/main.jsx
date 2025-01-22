@@ -22,6 +22,10 @@ import UpdateProduct from './pages/dashboard/UpdateProduct.jsx';
 import ModeratorRoute from './routes/ModeratorRoute.jsx';
 import ProductReview from './pages/dashboard/ProductReview.jsx';
 import ReportedContent from './pages/dashboard/ReportedContent.jsx';
+import Statistics from './pages/dashboard/Statistics.jsx';
+import ManageUser from './pages/dashboard/ManageUser.jsx';
+import ManageCoupon from './pages/dashboard/ManageCoupon.jsx';
+import AdminRoute from './routes/AdminRoute.jsx';
 
 const queryClient = new QueryClient();
 
@@ -59,9 +63,47 @@ createRoot(document.getElementById('root')).render(
                 <Route index path="my-profile" element={<MyProfile />} />
                 <Route path="add-product" element={<AddProduct />} />
                 <Route path="my-product" element={<MyProduct />} />
-                <Route path="product-review" element={<ProductReview />} />
-                <Route path="reported-content" element={<ReportedContent />} />
+                <Route
+                  path="product-review"
+                  element={
+                    <ModeratorRoute>
+                      <ProductReview />
+                    </ModeratorRoute>
+                  }
+                />
+                <Route
+                  path="reported-content"
+                  element={
+                    <ModeratorRoute>
+                      <ReportedContent />
+                    </ModeratorRoute>
+                  }
+                />
                 <Route path="update/:id" element={<UpdateProduct />} />
+                <Route
+                  path="statistics"
+                  element={
+                    <AdminRoute>
+                      <Statistics />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="user"
+                  element={
+                    <AdminRoute>
+                      <ManageUser />
+                    </AdminRoute>
+                  }
+                />
+                <Route
+                  path="coupon"
+                  element={
+                    <AdminRoute>
+                      <ManageCoupon />
+                    </AdminRoute>
+                  }
+                />
               </Route>
               <Route path="*" element={<Error />} />
             </Routes>

@@ -4,19 +4,12 @@ import AuthContext from '../../context/AuthContext';
 import avatar from '../../assets/avatar.png';
 
 const Navbar = () => {
-  const { user, signOutUser } = useContext(AuthContext);
-
+  const { user, signOutUser, loading } = useContext(AuthContext);
+  console.log(user);
   const navLinks = (
     <>
       <li>
-        <NavLink
-          to={'/'}
-          // className={({ isActive }) =>
-          //   isActive ? 'bg-primary text-neutral' : ''
-          // }
-        >
-          Home
-        </NavLink>
+        <NavLink to={'/'}>Home</NavLink>
       </li>
       <li>
         <NavLink to={'products'}>Products</NavLink>
@@ -41,7 +34,7 @@ const Navbar = () => {
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src={user?.photoURL || avatar}
+                src={user?.photoURL || user?.photo || avatar}
               />
             </div>
           </div>
@@ -50,7 +43,12 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-300 rounded-box z-[10] mt-3 w-52 p-2 shadow"
           >
             <p className="text-center font-semibold text-lg">
-              {user?.displayName && 'Hi! ' + user.displayName}
+              {(loading && user?.displayName) ||
+                user?.name ||
+                (user?.email && 'Hi! ' + user?.displayName) ||
+                user?.name ||
+                user?.email ||
+                'User'}
             </p>
             <div className="divider m-0"></div>
             <li>

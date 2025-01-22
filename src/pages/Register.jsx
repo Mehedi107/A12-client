@@ -29,7 +29,7 @@ const Register = () => {
       verifyPassword(password);
       setLoading(true);
 
-      await createUser(email, password);
+      await createUser(email, password, name, photo);
       // Save user data to Database...
       await saveUserDataToDB(formData);
 
@@ -69,6 +69,7 @@ const Register = () => {
               id="photo"
               className="input w-full mt-2 input-bordered"
               placeholder="Enter Photo URL"
+              required
             />
           </div>
 

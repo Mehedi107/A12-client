@@ -5,23 +5,30 @@ import { useEffect, useState } from 'react';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const Dashboard = () => {
-  const { user } = useAuth();
+  const { user, signOutUser } = useAuth();
   const [role, setRole] = useState('');
-
   const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
     const fetchCurrentUser = async () => {
       const res = await axiosPublic.get(`/user/${user.email}`);
-      // console.log(res.data.role);
-      setRole(res.data.role);
+      if (res.data.role === 'moderator') {
+        setRole(res.data.role);
+      }
+
+      if (res.data.role === 'admin') {
+        setRole(res.data.role);
+      }
+
+      if (res.data.role === 'user') {
+        setRole(res.data.role);
+      }
     };
     fetchCurrentUser();
   }, [axiosPublic, user.email]);
 
-  if (role === 'moderator') {
-    // console.log(role);
-  }
+  // console.log(role);
+
   return (
     <div className="flex flex-col md:flex-row h-screen">
       <HelmetAsync title="Dashboard" />
@@ -67,7 +74,7 @@ const Dashboard = () => {
           </li>
 
           {/* Moderator routes */}
-          {role === 'moderator' ? (
+          {role === 'moderator' || role === 'admin' ? (
             <>
               <li className="mb-2">
                 <NavLink
@@ -92,6 +99,50 @@ const Dashboard = () => {
                   }
                 >
                   Reported Content
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            ''
+          )}
+
+          {role === 'admin' ? (
+            <>
+              <li className="mb-2">
+                <NavLink
+                  to={'user'}
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'bg-gray-700 block p-2 rounded'
+                      : 'block p-2 rounded hover:bg-gray-700'
+                  }
+                >
+                  Manage User
+                </NavLink>
+              </li>
+              <li className="mb-2">
+                <NavLink
+                  to={'statistics'}
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'bg-gray-700 block p-2 rounded'
+                      : 'block p-2 rounded hover:bg-gray-700'
+                  }
+                >
+                  Statistics
+                </NavLink>
+              </li>
+
+              <li className="mb-2">
+                <NavLink
+                  to={'coupon'}
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'bg-gray-700 block p-2 rounded'
+                      : 'block p-2 rounded hover:bg-gray-700'
+                  }
+                >
+                  Manage Coupon
                 </NavLink>
               </li>
             </>
@@ -125,11 +176,19 @@ const Dashboard = () => {
               All Products
             </NavLink>
           </li>
+          <li className="mb-2">
+            <NavLink
+              onClick={signOutUser}
+              className="block p-2 rounded hover:bg-gray-700"
+            >
+              Logout
+            </NavLink>
+          </li>
         </ul>
       </div>
 
       {/* Content Area */}
-      <div className="w-full md:w-3/4 bg-gray-100 p-4 overflow-y-auto">
+      <div className="w-full md:w-3/4 bg-gray-100 p-4">
         <Outlet />
       </div>
     </div>

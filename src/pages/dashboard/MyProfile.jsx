@@ -4,6 +4,7 @@ import Modal from '../../components/shared/Modal';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import { notifyError, notifySuccess } from './../../utils/notification';
+import avatar from '../../assets/avatar.png';
 
 const MyProfile = () => {
   const { user } = useAuth();
@@ -31,7 +32,7 @@ const MyProfile = () => {
       if (res.data.modifiedCount) {
         notifySuccess('Payment successful');
         document.getElementById('my_modal_3').close();
-        refetch;
+        refetch();
       }
     } catch (error) {
       notifyError('Payment failed');
@@ -39,20 +40,25 @@ const MyProfile = () => {
     }
   };
 
+  // console.log(userData);
+
   return (
     <>
       <HelmetAsync title="My Profile" />
       <div>
-        <div className="mt-20 p-6 max-w-4xl mx-auto bg-gray-100 rounded-lg shadow-md ">
+        <div className="mt-20 p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md ">
           {/* User Info Section */}
           <div className="user-info text-center">
             <img
-              src={userData?.photo || 'https://via.placeholder.com/150'}
+              src={user?.photoURL || userData?.photo || avatar}
               alt={`${userData?.name}'s profile`}
-              className="w-32 h-32 mx-auto rounded-full object-cover"
+              className="w-32 h-32 mx-auto rounded-full object-cover border-4"
             />
             <h2 className="text-2xl font-semibold mt-4">
-              {userData?.name || 'Guest User'}
+              {user?.displayName ||
+                userData?.name ||
+                userData?.email ||
+                'Guest User'}
             </h2>
             <p className="text-gray-600 mt-2">
               {userData?.email || 'Email not available'}
