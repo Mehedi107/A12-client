@@ -55,6 +55,7 @@ const MyProduct = () => {
       }
     });
   };
+
   return (
     <div>
       <HelmetAsync title="My Product" />

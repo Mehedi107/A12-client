@@ -26,6 +26,7 @@ import Statistics from './pages/dashboard/Statistics.jsx';
 import ManageUser from './pages/dashboard/ManageUser.jsx';
 import ManageCoupon from './pages/dashboard/ManageCoupon.jsx';
 import AdminRoute from './routes/AdminRoute.jsx';
+import UpdateCoupon from './pages/dashboard/UpdateCoupon.jsx';
 
 const queryClient = new QueryClient();
 
@@ -104,7 +105,16 @@ createRoot(document.getElementById('root')).render(
                     </AdminRoute>
                   }
                 />
+                <Route
+                  path="update-coupon/:id"
+                  element={
+                    <AdminRoute>
+                      <UpdateCoupon />
+                    </AdminRoute>
+                  }
+                />
               </Route>
+
               <Route path="*" element={<Error />} />
             </Routes>
             <Toaster />
