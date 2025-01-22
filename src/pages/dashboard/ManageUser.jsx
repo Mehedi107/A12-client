@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { notifyError, notifySuccess } from '../../utils/notification';
-import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const ManageUser = () => {
   const [loading, setLoading] = useState(true);
-  // const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
 
   const fetchUsers = async () => {

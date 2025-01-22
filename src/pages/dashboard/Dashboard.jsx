@@ -30,7 +30,7 @@ const Dashboard = () => {
   // console.log(role);
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex flex-col md:flex-row min-h-screen">
       <HelmetAsync title="Dashboard" />
       {/* Navigation Sidebar */}
       <div className="w-full md:w-1/4 bg-gray-800 text-white p-4">
