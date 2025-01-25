@@ -47,7 +47,6 @@ const AddProduct = () => {
       console.log('Error adding product', error);
     }
   };
-  console.log(user);
 
   return (
     <div>

@@ -7,6 +7,7 @@ import { BsTriangle } from 'react-icons/bs';
 import { useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import { handleUpvote } from '../utils/handleUpVote';
+import HelmetAsync from './../components/shared/HelmetAsync';
 
 const ProductAll = () => {
   const axiosPublic = useAxiosPublic();
@@ -17,12 +18,8 @@ const ProductAll = () => {
   const ITEMS_PER_PAGE = 6;
 
   const fetchAllProducts = async () => {
-    try {
-      const res = await axiosPublic.get('/all-products');
-      return res.data;
-    } catch (error) {
-      console.error('Error fetching trending products:', error);
-    }
+    const res = await axiosPublic.get('/all-products');
+    return res.data;
   };
 
   const {
@@ -35,9 +32,9 @@ const ProductAll = () => {
     queryFn: fetchAllProducts,
   });
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  // if (isLoading) {
+  //   return <LoadingSpinner />;
+  // }
 
   if (isError) {
     return <div>Error fetching products</div>;
@@ -65,6 +62,7 @@ const ProductAll = () => {
 
   return (
     <div className="py-10 px-4">
+      <HelmetAsync title={'All Products'} />
       <div className="flex justify-between gap-5 mb-10 items-center">
         <h2 className="font-semibold text-3xl">All Products</h2>
         <input
@@ -75,6 +73,12 @@ const ProductAll = () => {
           onChange={e => setSearchQuery(e.target.value)}
         />
       </div>
+
+      {isLoading && (
+        <div className="min-h-screen">
+          <LoadingSpinner />{' '}
+        </div>
+      )}
 
       {/* Products grid */}
       <div className="grid items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

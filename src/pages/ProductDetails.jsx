@@ -4,15 +4,28 @@ import useAxiosPublic from '../hooks/useAxiosPublic';
 import { handleUpvote } from '../utils/handleUpVote';
 import useAuth from '../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
-import { BsTriangle } from 'react-icons/bs';
+import { BsTriangleFill } from 'react-icons/bs';
 import { notifyError, notifySuccess } from '../utils/notification';
 import ReviewSlide from '../components/ReviewSlide';
+import HelmetAsync from '../components/shared/HelmetAsync';
 
 const ProductDetails = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
+
+  const fetchCurrentUser = async () => {
+    const res = await axiosPublic.get(`/user/${user.email}`);
+    return res.data;
+  };
+
+  const { data: currentUser = {} } = useQuery({
+    queryKey: ['user'],
+    queryFn: fetchCurrentUser,
+  });
+
+  // console.log(currentUser);
 
   const fetchProductDetails = async () => {
     try {
@@ -42,16 +55,10 @@ const ProductDetails = () => {
     }
   };
 
-  const {
-    data: reviews = [],
-    // isLoading: isLoadingReviews,
-    // isError: isErrorReviews,
-    // refetch: refetchReviews,
-  } = useQuery({
+  const { data: reviews = [] } = useQuery({
     queryKey: ['reviews', id],
     queryFn: fetchReviews,
   });
-  console.log(reviews);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -75,7 +82,6 @@ const ProductDetails = () => {
       notifySuccess('Product reported successfully!');
     } catch (error) {
       console.error(error);
-      notifyError(error);
     }
   };
 
@@ -83,7 +89,7 @@ const ProductDetails = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const photo = form.photo.value;
+    const photo = currentUser.photo;
     const reviewDescription = form.description.value;
     const rating = form.rating.value;
 
@@ -92,13 +98,12 @@ const ProductDetails = () => {
       rating,
       name,
       photo,
-      email: user?.email,
+      email: currentUser.email,
     };
 
-    // console.log(formData);
     try {
       const res = await axiosPublic.post(`/product/${id}/reviews`, formData);
-      console.log(res);
+
       if (res.data.insertedId) {
         notifySuccess('You review has been submitted successfully!');
       }
@@ -114,118 +119,122 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      {/* Product Details Section */}
-      <div className="product-details shadow-lg p-6 rounded-md">
-        <h2 className="text-xl font-semibold mb-3">{product.name}</h2>
-        <img
-          className="w-20"
-          src="https://placehold.co/400"
-          alt={product.name}
-        />
-        <p className="my-3">
-          <strong>Description: </strong>
-          {product.description}
-        </p>
-        <div className="flex items-center justify-between">
-          <button
-            onClick={() =>
-              handleUpvote(product._id, user, navigate, axiosPublic, refetch)
-            }
-            className="upvote-btn btn btn-primary  "
-          >
-            <BsTriangle />
-            {product.vote}
-          </button>
-          <button className="btn btn-error text-white" onClick={handleReport}>
-            Report
-          </button>
+    <div className="py-16">
+      <HelmetAsync title="Product details" />
+      <div className="grid grid-cols-1 gap-5">
+        {/* Product Details Section */}
+        <div className="flex gap-5 justify-between items-center shadow-lg p-6 rounded-md">
+          <div className="flex gap-5 items-center">
+            <div>
+              <img
+                className="w-20"
+                src={product.image || 'https://placehold.co/400'}
+                alt={product.name}
+              />
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold mb-3">{product.name}</h2>
+              <p className="my-3">
+                <strong>Description: </strong>
+                {product.description}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col gap-3">
+            <button
+              onClick={() =>
+                handleUpvote(product._id, user, navigate, axiosPublic, refetch)
+              }
+              className="btn btn-primary text-white"
+            >
+              <BsTriangleFill className="text-base" />
+              {product.vote}
+            </button>
+            <button className="btn btn-error" onClick={handleReport}>
+              Report
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Reviews Section */}
-      <div className="reviews shadow-lg p-6 rounded-md my-6">
-        <h3 className="text-2xl font-semibold mb-5">User Reviews</h3>
-        {reviews ? (
-          <ReviewSlide reviews={reviews} />
-        ) : (
-          'No reviews available for this product'
-        )}
-      </div>
-
-      {/* Post Review Section */}
-      <div className="post-review">
-        <form
-          onSubmit={handleReviewSubmit}
-          className="mx-auto bg-white shadow-lg rounded-lg p-6 space-y-4"
-        >
-          <h3 className="text-xl font-semibold text-center">Post a Review</h3>
-
-          <div className="grid grid-cols-2 gap-6">
-            {/* Reviewer Name */}
-            <div className="form-control md:col-span-1 col-span-2">
-              <label className="label">
-                <span className="label-text font-medium">Reviewer Name</span>
-              </label>
-              <input
-                type="text"
-                value={user?.displayName}
-                name="name"
-                readOnly
-                placeholder="Reviewer Name"
-                className="input input-bordered w-full"
-              />
-            </div>
-
-            {/* Reviewer Image */}
-            <div className="form-control md:col-span-1 col-span-2">
-              <label className="label">
-                <span className="label-text font-medium">Reviewer Image</span>
-              </label>
-              <input
-                type="text"
-                name="photo"
-                value={user?.photoURL}
-                readOnly
-                placeholder="Reviewer Image"
-                className="input input-bordered w-full"
-              />
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {/* Reviews Section */}
+          <div className="reviews shadow-lg p-6 rounded-md">
+            <h3 className="text-2xl font-semibold mb-5">User Reviews</h3>
+            {reviews ? (
+              <ReviewSlide reviews={reviews} />
+            ) : (
+              'No reviews available for this product'
+            )}
           </div>
 
-          <div className="form-control md:col-span-1 col-span-2">
-            <label className="label">
-              <span className="label-text font-medium">Review Description</span>
-            </label>
-            <textarea
-              placeholder="Write your review here..."
-              className="textarea textarea-bordered"
-              required
-              rows={1}
-              name="description"
-            ></textarea>
+          {/* Post Review Section */}
+          <div className="post-review">
+            <form
+              onSubmit={handleReviewSubmit}
+              className="mx-auto bg-white shadow-lg rounded-lg p-6 space-y-4"
+            >
+              <h3 className="text-xl font-semibold text-center">
+                Post a Review
+              </h3>
+              {/* Reviewer Name */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium">Reviewer Name</span>
+                </label>
+                <input
+                  type="text"
+                  value={user?.displayName}
+                  name="name"
+                  readOnly
+                  placeholder="Reviewer Name"
+                  className="input input-bordered w-full"
+                />
+              </div>
+              {/* Reviewer Image */}
+              <div className="form-control">
+                <label className="label font-semibold">Reviewer Image</label>
+                <img
+                  src={user.photoURL || 'https://via.placeholder.com/150'}
+                  alt="Owner"
+                  className="w-16 h-16 rounded-full"
+                />
+              </div>
+              {/* Review description */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium">
+                    Review Description
+                  </span>
+                </label>
+                <textarea
+                  placeholder="Write your review here..."
+                  className="textarea textarea-bordered"
+                  required
+                  name="description"
+                ></textarea>
+              </div>
+              {/* Rating */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text font-medium">Rating</span>
+                </label>
+                <input
+                  type="number"
+                  name="rating"
+                  placeholder="Rating (1-5)"
+                  min="1"
+                  max="5"
+                  className="input input-bordered w-full"
+                  required
+                />
+              </div>
+              {/* Submit */}
+              <button type="submit" className="btn btn-primary w-full">
+                Submit
+              </button>
+            </form>
           </div>
-
-          {/* Rating */}
-          <div className="form-control md:col-span-1 col-span-2">
-            <label className="label">
-              <span className="label-text font-medium">Rating</span>
-            </label>
-            <input
-              type="number"
-              name="rating"
-              placeholder="Rating (1-5)"
-              min="1"
-              max="5"
-              className="input input-bordered w-full"
-              required
-            />
-          </div>
-
-          <button type="submit" className="btn btn-primary w-full mt-4">
-            Submit
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );

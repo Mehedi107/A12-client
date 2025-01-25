@@ -4,6 +4,7 @@ import { notifyError, notifySuccess } from './../../utils/notification';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router';
+import HelmetAsync from '../../components/shared/HelmetAsync';
 
 const ManageCoupon = () => {
   const axiosSecure = useAxiosSecure();
@@ -83,6 +84,7 @@ const ManageCoupon = () => {
 
   return (
     <div className="p-6">
+      <HelmetAsync title="Manage coupons" />
       <h1 className="text-2xl font-bold mb-4">Manage Coupons</h1>
 
       {/* Add Coupon Form */}

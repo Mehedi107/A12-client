@@ -4,6 +4,7 @@ import { BsTriangle } from 'react-icons/bs';
 import useAuth from '../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import { handleUpvote } from '../utils/handleUpVote';
+import CardSkeleton from '../components/shared/cardSkeleton';
 
 const FeaturedProducts = () => {
   const axiosPublic = useAxiosPublic();
@@ -12,7 +13,7 @@ const FeaturedProducts = () => {
 
   const fetchFeaturedProducts = async () => {
     try {
-      const res = await axiosPublic.get('/products');
+      const res = await axiosPublic.get('/products/feature');
       return res.data;
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -25,38 +26,11 @@ const FeaturedProducts = () => {
   });
 
   return (
-    <section className="featured-products py-10">
+    <section className="featured-products py-24">
       <h2 className="text-3xl font-bold text-center mb-6">Featured Products</h2>
-      <div className="grid items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {/* when fetching product */}
-        {products.length === 0 && (
-          <>
-            <div className="flex flex-col gap-4">
-              <div className="skeleton h-32 w-full"></div>
-              <div className="skeleton h-4 w-28"></div>
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
-            </div>
-            <div className="flex flex-col gap-4">
-              <div className="skeleton h-32 w-full"></div>
-              <div className="skeleton h-4 w-28"></div>
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
-            </div>
-            <div className="flex flex-col gap-4">
-              <div className="skeleton h-32 w-full"></div>
-              <div className="skeleton h-4 w-28"></div>
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
-            </div>
-            <div className="flex flex-col gap-4">
-              <div className="skeleton h-32 w-full"></div>
-              <div className="skeleton h-4 w-28"></div>
-              <div className="skeleton h-4 w-full"></div>
-              <div className="skeleton h-4 w-full"></div>
-            </div>
-          </>
-        )}
+        {products.length === 0 && <CardSkeleton num={4} />}
 
         {/* When product loaded successfully */}
         {products.map(product => (

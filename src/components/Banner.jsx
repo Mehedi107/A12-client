@@ -2,12 +2,13 @@ import bg1 from '../assets/banner/banner_img_1.svg';
 import bg2 from '../assets/banner/banner_img_2.svg';
 import bg3 from '../assets/banner/banner_img_3.svg';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectFade, Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css';
-import { EffectFade, Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css/autoplay';
 
 const bannerSlides = [
   {
@@ -35,24 +36,28 @@ const Banner = () => {
       <Swiper
         spaceBetween={30}
         effect={'fade'}
+        autoplay
+        loop={true}
         navigation={true}
         pagination={{
           clickable: true,
         }}
-        modules={[EffectFade, Navigation, Pagination]}
+        modules={[EffectFade, Navigation, Pagination, Autoplay]}
         className="mySwiper"
       >
         {bannerSlides.map((slide, i) => (
           <SwiperSlide key={i}>
-            <div className="flex flex-col md:flex-row gap-20 justify-center  items-center bg-white py-10">
-              <div className="w-1/2">
+            <div className="flex flex-col md:flex-row gap-20 justify-center  items-center bg-white dark:bg-blend-darken py-10">
+              <div className="md:w-1/2">
                 <img
-                  className="w-full max-h-80vh object-cover"
+                  className="h-screen object-contain max-h-[400px] mx-auto"
                   src={slide.img}
                 />
               </div>
-              <div className="w-1/2">
-                <h1 className="text-xl md:text-3xl font-bold">{slide.title}</h1>
+              <div className="md:w-1/2">
+                <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold">
+                  {slide.title}
+                </h1>
                 <p>{slide.description}</p>
               </div>
             </div>

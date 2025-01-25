@@ -1,7 +1,5 @@
 import axios from 'axios';
 
 export const saveUserDataToDB = async data => {
-  const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/user`, data);
-
-  if (!res.data.insertedId) console.log('Data could not saved into database!');
+  await axios.post(`${import.meta.env.VITE_SERVER_URL}/user`, data);
 };

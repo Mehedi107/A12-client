@@ -2,6 +2,7 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router';
 import { notifyError, notifySuccess } from '../../utils/notification';
+import HelmetAsync from '../../components/shared/HelmetAsync';
 
 const ProductReview = () => {
   const axiosPublic = useAxiosPublic();
@@ -65,6 +66,7 @@ const ProductReview = () => {
 
   return (
     <div className="p-6 bg-base-100 min-h-screen">
+      <HelmetAsync title="Product review" />
       <h1 className="text-2xl font-bold text-center mb-6">
         Product Review Queue
       </h1>

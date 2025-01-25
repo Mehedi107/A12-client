@@ -23,8 +23,6 @@ const AdvertiseCoupon = () => {
     queryFn: fetchAllCoupons,
   });
 
-  console.log(coupons);
-
   return (
     <section className="py-10">
       <h2 className="text-3xl font-bold text-center mb-6">Available Coupons</h2>
@@ -35,7 +33,7 @@ const AdvertiseCoupon = () => {
           autoplay
           loop={true}
           pagination={{ clickable: true }}
-          className="swiper-container h-64"
+          className="swiper-container h-72"
           breakpoints={{
             640: {
               slidesPerView: 1,
@@ -66,7 +64,6 @@ const AdvertiseCoupon = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="swiper-pagination !mt-6"></div>
       </div>
     </section>
   );

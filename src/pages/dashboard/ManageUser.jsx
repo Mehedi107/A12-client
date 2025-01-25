@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { notifyError, notifySuccess } from '../../utils/notification';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import HelmetAsync from '../../components/shared/HelmetAsync';
 
 const ManageUser = () => {
   const [loading, setLoading] = useState(true);
@@ -27,7 +28,6 @@ const ManageUser = () => {
   const updateRole = async (email, role) => {
     try {
       const res = await axiosSecure.patch(`/users/${email}/role`, { role });
-      // console.log(res);
       if (res.data.modifiedCount) {
         notifySuccess('User role has been changed!');
         refetch();
@@ -47,6 +47,7 @@ const ManageUser = () => {
   }
   return (
     <div className="p-6">
+      <HelmetAsync title="Manage users" />
       <h1 className="text-2xl font-semibold mb-6 text-center">Manage Users</h1>
       <div className="overflow-x-auto">
         <table className="table-auto border-collapse w-full text-left">

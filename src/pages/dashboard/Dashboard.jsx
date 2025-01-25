@@ -27,8 +27,6 @@ const Dashboard = () => {
     fetchCurrentUser();
   }, [axiosPublic, user.email]);
 
-  // console.log(role);
-
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
       <HelmetAsync title="Dashboard" />

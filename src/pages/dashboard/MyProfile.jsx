@@ -12,13 +12,13 @@ const MyProfile = () => {
 
   const subscriptionAmount = 49.99;
 
-  const fetchUser = async () => {
+  const fetchCurrentUser = async () => {
     const res = await axiosPublic.get(`/user/${user.email}`);
     return res.data;
   };
   const { data: userData = {}, refetch } = useQuery({
     queryKey: ['user'],
-    queryFn: fetchUser,
+    queryFn: fetchCurrentUser,
   });
 
   const handleSubscribe = () => {

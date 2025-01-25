@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAxiosPublic from './../../hooks/useAxiosPublic';
+import HelmetAsync from '../../components/shared/HelmetAsync';
 
 const ReportedContent = () => {
   const axiosSecure = useAxiosSecure();
@@ -54,10 +55,9 @@ const ReportedContent = () => {
     });
   };
 
-  // console.log(products);
-
   return (
     <div className="max-w-5xl mx-auto p-6">
+      <HelmetAsync title="Reported product" />
       <h2 className="text-2xl font-bold text-center mb-6">Reported Contents</h2>
 
       {products.length === 0 ? (

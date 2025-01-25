@@ -3,6 +3,7 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 import ComponentPieChart from '../../components/shared/chart/ComponentPieChart';
 import { notifyError } from '../../utils/notification';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import HelmetAsync from '../../components/shared/HelmetAsync';
 
 const Statistics = () => {
   const axiosPublic = useAxiosPublic();
@@ -55,6 +56,7 @@ const Statistics = () => {
 
   return (
     <div>
+      <HelmetAsync title="Statistics" />
       <h2>Statistics</h2>
       <div className="flex flex-wrap gap-5">
         {/* Product Status */}

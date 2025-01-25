@@ -5,11 +5,15 @@ import avatar from '../../assets/avatar.png';
 
 const Navbar = () => {
   const { user, signOutUser, loading } = useContext(AuthContext);
-  console.log(user);
   const navLinks = (
     <>
       <li>
-        <NavLink to={'/'}>Home</NavLink>
+        <NavLink
+          // className={({ isActive }) => (isActive ? '!bg-red-500' : '')}
+          to={'/'}
+        >
+          Home
+        </NavLink>
       </li>
       <li>
         <NavLink to={'products'}>Products</NavLink>
@@ -76,9 +80,9 @@ const Navbar = () => {
       </div>
       {/* Nav Center */}
       <div className="navbar-center ">
-        <a href="" className="md:hidden text-xl">
+        <Link to="/" className="md:hidden text-xl">
           ProdVent
-        </a>
+        </Link>
         <ul className="hidden md:flex menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       {/* Nav End */}
@@ -87,7 +91,7 @@ const Navbar = () => {
         <div className="hidden md:block">{userProfile}</div>
 
         {/* Mobile navigation */}
-        <div className="drawer drawer-end w-auto md:hidden">
+        <div className="drawer drawer-end w-auto md:hidden z-10">
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
           <label
             htmlFor="my-drawer"

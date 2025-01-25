@@ -4,6 +4,7 @@ import useAxiosPublic from '../hooks/useAxiosPublic';
 import { BsTriangle } from 'react-icons/bs';
 import useAuth from '../hooks/useAuth';
 import { handleUpvote } from '../utils/handleUpVote';
+import CardSkeleton from '../components/shared/cardSkeleton';
 
 const TrendingProducts = () => {
   const axiosPublic = useAxiosPublic();
@@ -55,24 +56,30 @@ const TrendingProducts = () => {
   //   }
   // };
 
-  if (isLoading) {
-    return <p className="text-center my-5">Loading Trending Products...</p>;
-  }
+  // if (isLoading) {
+  //   return <p className="text-center my-5">Loading Trending Products...</p>;
+  // }
 
-  if (isError) {
-    return (
-      <p className="text-center text-red-500 my-5">
-        Failed to load trending products. Please try again later.
-      </p>
-    );
-  }
-
-  // console.log(products);
+  // if (isError) {
+  //   return (
+  //     <p className="text-center text-red-500 my-5">
+  //       Failed to load trending products. Please try again later.
+  //     </p>
+  //   );
+  // }
 
   return (
     <section className="trending-products py-10">
       <h2 className="text-3xl font-bold text-center mb-6">Trending Products</h2>
+
+      {/* If no product are found */}
+      {isError && <p className="text-center text-lg">No products found...</p>}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {/* While there is no product or Loading product */}
+        {isLoading && <CardSkeleton num={3} />}
+
+        {/* Display all products */}
         {products.map(product => (
           <div
             key={product._id}
@@ -114,12 +121,16 @@ const TrendingProducts = () => {
         ))}
       </div>
       <div className="text-center mt-6">
-        <button
-          onClick={() => navigate('/products')}
-          className="btn btn-neutral btn-wide px-6 py-3 rounded "
-        >
-          Show All Products
-        </button>
+        {isError ? (
+          ''
+        ) : (
+          <button
+            onClick={() => navigate('/products')}
+            className="btn btn-neutral btn-wide px-6 py-3 rounded "
+          >
+            Show All Products
+          </button>
+        )}
       </div>
     </section>
   );
