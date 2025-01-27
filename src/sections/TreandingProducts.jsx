@@ -70,7 +70,7 @@ const TrendingProducts = () => {
 
   return (
     <section className="trending-products py-10">
-      <h2 className="text-3xl font-bold text-center mb-6">Trending Products</h2>
+      <h2 className=" text-center mb-6">Trending Products</h2>
 
       {/* If no product are found */}
       {isError && <p className="text-center text-lg">No products found...</p>}
@@ -83,7 +83,7 @@ const TrendingProducts = () => {
         {products.map(product => (
           <div
             key={product._id}
-            className="product-card bg-white rounded-lg shadow-lg p-4"
+            className="product-card bg-base-200 rounded-lg shadow p-4"
           >
             <img
               src={product.image || 'https://placehold.co/400'}
@@ -105,7 +105,7 @@ const TrendingProducts = () => {
                     refetch
                   )
                 }
-                className="upvote-btn flex items-center gap-2 px-4 py-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200"
+                className="upvote-btn flex items-center gap-2 btn px-6 rounded bg-blue-100 text-blue-700 hover:bg-blue-200"
               >
                 <BsTriangle />
                 {product.vote}
@@ -126,7 +126,7 @@ const TrendingProducts = () => {
         ) : (
           <button
             onClick={() => navigate('/products')}
-            className="btn btn-neutral btn-wide px-6 py-3 rounded "
+            className="btn text-base btn-neutral btn-wide mt-5 px-6 py-3 rounded "
           >
             Show All Products
           </button>

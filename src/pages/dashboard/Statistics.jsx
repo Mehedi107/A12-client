@@ -60,10 +60,8 @@ const Statistics = () => {
       <h2>Statistics</h2>
       <div className="flex flex-wrap gap-5">
         {/* Product Status */}
-        <div className="bg-white shadow-lg rounded-md p-5 ">
-          <p className="text-center text-xl font-medium">
-            Total Products: {products.length}
-          </p>
+        <div className="bg-white shadow-lg rounded-md p-5 w-full">
+          <h2 className="text-center">Total Products: {products.length}</h2>
           <ComponentPieChart pieData={data} />
         </div>
       </div>

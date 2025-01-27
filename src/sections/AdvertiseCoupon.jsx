@@ -25,7 +25,7 @@ const AdvertiseCoupon = () => {
 
   return (
     <section className="py-10">
-      <h2 className="text-3xl font-bold text-center mb-6">Available Coupons</h2>
+      <h2 className="text-center mb-6">Available Coupons</h2>
       <div>
         <Swiper
           modules={[Pagination, A11y, Autoplay]}
@@ -41,11 +41,11 @@ const AdvertiseCoupon = () => {
             },
             768: {
               slidesPerView: 2,
-              spaceBetween: 40,
+              spaceBetween: 30,
             },
             1024: {
               slidesPerView: 3,
-              spaceBetween: 50,
+              spaceBetween: 40,
             },
           }}
         >
@@ -56,9 +56,18 @@ const AdvertiseCoupon = () => {
                   <p className="text-center text-3xl font-medium">
                     {coupon.code}
                   </p>
-                  <p>Expires: {coupon.expiryDate}</p>
-                  <p>Description: {coupon.description.slice(0, 60)}</p>
-                  <p>Discount: {coupon.discount}</p>
+                  <p>
+                    <strong>Expires: </strong>
+                    {coupon.expiryDate}
+                  </p>
+                  <p>
+                    <strong>Description: </strong>
+                    {coupon.description.slice(0, 60)}
+                  </p>
+                  <p>
+                    <strong>Discount: </strong>
+                    {coupon.discount}
+                  </p>
                 </div>
               </div>
             </SwiperSlide>

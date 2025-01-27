@@ -56,17 +56,17 @@ const ReportedContent = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="w-full sm:p-6">
       <HelmetAsync title="Reported product" />
-      <h2 className="text-2xl font-bold text-center mb-6">Reported Contents</h2>
+      <h2 className="text-center mb-6">Reported Contents</h2>
 
       {products.length === 0 ? (
         <div className="text-center text-gray-500">
           No reported products to review.
         </div>
       ) : (
-        <div className="overflow-x-auto ">
-          <table className="table w-full bg-white table-zebra">
+        <div className="overflow-x-auto">
+          <table className="table w-full border border-base-300 border-collapse rounded-md text-center">
             {/* Table Head */}
             <thead className="text-base bg-base-300">
               <tr>
@@ -80,8 +80,8 @@ const ReportedContent = () => {
             <tbody>
               {products.map((product, index) => (
                 <tr key={product._id}>
-                  <td>{index + 1}</td>
-                  <td>{product.name}</td>
+                  <td className="border border-base-300">{index + 1}</td>
+                  <td className="border border-base-300">{product.name}</td>
                   <td className="flex justify-center items-center gap-4">
                     <Link
                       to={`/product/${product._id}`}

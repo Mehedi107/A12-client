@@ -16,7 +16,7 @@ const Modal = ({ handlePaymentSuccess }) => {
             <p className="mb-6">You are subscribing for 49.99.</p>
             <button
               onClick={handlePaymentSuccess}
-              className="pay-btn px-6 py-3 text-white bg-green-500 hover:bg-green-600 rounded-lg text-lg"
+              className="btn btn-neutral rounded-lg text-lg font-medium"
             >
               Pay Now
             </button>

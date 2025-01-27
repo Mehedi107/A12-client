@@ -1,23 +1,22 @@
 import { useNavigate, useParams } from 'react-router';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { notifyError, notifySuccess } from '../../utils/notification';
-import { useQuery } from '@tanstack/react-query';
 import HelmetAsync from '../../components/shared/HelmetAsync';
+import { useEffect, useState } from 'react';
 
 const UpdateProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const [product, setAllProduct] = useState({});
 
-  const fetchProductById = async () => {
-    const res = await axiosPublic.get(`/product/${id}`);
-    return res.data;
-  };
-
-  const { data: product = {} } = useQuery({
-    queryKey: ['product'],
-    queryFn: fetchProductById,
-  });
+  useEffect(() => {
+    const fetchProductById = async () => {
+      const res = await axiosPublic.get(`/product/${id}`);
+      setAllProduct(res.data);
+    };
+    fetchProductById();
+  }, [axiosPublic, id]);
 
   console.log(product);
 

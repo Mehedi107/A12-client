@@ -68,7 +68,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="navbar bg-base-300">
+    <nav className="navbar border-b">
       {/* Nav Start */}
       <div className="navbar-start">
         {/* Avatar */}
@@ -92,9 +92,9 @@ const Navbar = () => {
 
         {/* Mobile navigation */}
         <div className="drawer drawer-end w-auto md:hidden z-10">
-          <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+          <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
           <label
-            htmlFor="my-drawer"
+            htmlFor="my-drawer-2"
             aria-label="open sidebar"
             className="btn btn-square btn-ghost"
           >
@@ -114,11 +114,11 @@ const Navbar = () => {
           </label>
           <div className="drawer-side">
             <label
-              htmlFor="my-drawer"
+              htmlFor="my-drawer-2"
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+            <ul className="menu bg-base-200 text-base-content min-h-full w-3/4 sm:w-80 p-4">
               {/* Sidebar content here */}
               {navLinks}
             </ul>

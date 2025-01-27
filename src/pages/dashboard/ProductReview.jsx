@@ -26,8 +26,15 @@ const ProductReview = () => {
     try {
       const res = await axiosPublic.patch(`/featured/${id}`);
       console.log(res);
+      // Updated as featured
       if (res.data.modifiedCount) {
         notifySuccess('This is featured product now!');
+        refetch();
+      }
+
+      // Already featured
+      if (!res.data.modifiedCount) {
+        notifySuccess('Already a featured product!');
         refetch();
       }
     } catch (error) {
@@ -65,14 +72,12 @@ const ProductReview = () => {
   };
 
   return (
-    <div className="p-6 bg-base-100 min-h-screen">
+    <div className="sm:p-6 bg-base-100 min-h-screen">
       <HelmetAsync title="Product review" />
-      <h1 className="text-2xl font-bold text-center mb-6">
-        Product Review Queue
-      </h1>
+      <h2 className=" text-center mb-6">Product Review Queue</h2>
       <div className="overflow-x-auto">
-        <table className="table w-full">
-          <thead className="text-base">
+        <table className="table w-full border border-base-300 border-collapse rounded-md text-center">
+          <thead className="text-base bg-base-300">
             <tr>
               <th>#</th>
               <th>Product Name</th>
@@ -83,9 +88,9 @@ const ProductReview = () => {
           <tbody>
             {sortedProducts.map((product, index) => (
               <tr key={product._id}>
-                <td>{index + 1}</td>
-                <td>{product.name}</td>
-                <td>
+                <td className="border border-base-300">{index + 1}</td>
+                <td className="border border-base-300">{product.name}</td>
+                <td className="border border-base-300">
                   <span
                     className={`badge capitalize ${
                       product.status === 'pending'
@@ -98,7 +103,7 @@ const ProductReview = () => {
                     {product.status}
                   </span>
                 </td>
-                <td className="space-x-2">
+                <td className="flex gap-3">
                   <Link
                     to={`/product/${product._id}`}
                     className="btn btn-sm btn-info"

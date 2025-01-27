@@ -83,14 +83,14 @@ const ManageCoupon = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className=" sm:p-6">
       <HelmetAsync title="Manage coupons" />
-      <h1 className="text-2xl font-bold mb-4">Manage Coupons</h1>
+      <h2 className=" mb-4">Manage Coupons</h2>
 
       {/* Add Coupon Form */}
       <form
         onSubmit={handleAddCoupon}
-        className="mb-6 grid grid-cols-1 gap-4 max-w-lg"
+        className="mb-6 grid grid-cols-1 gap-4 w-full"
       >
         <input
           type="text"
@@ -127,12 +127,12 @@ const ManageCoupon = () => {
           onChange={e => setFormData({ ...formData, discount: e.target.value })}
           className="input input-bordered"
         />
-        <button type="submit" className="btn btn-primary w-full">
+        <button type="submit" className="btn btn-neutral w-full">
           Add Coupon
         </button>
       </form>
 
-      <h2 className="text-2xl my-10 font-bold">Coupons</h2>
+      <h2 className="mt-16 mb-10">Coupons</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Coupon List */}
         {isLoading && <p>Loading coupons...</p>}
@@ -147,7 +147,7 @@ const ManageCoupon = () => {
         {coupons.map(coupon => (
           <div
             key={coupon._id}
-            className="bg-white card shadow-lg p-4 border rounded"
+            className="bg-base-200 card shadow p-4 border rounded"
           >
             <h2 className="font-bold text-lg">{coupon.code}</h2>
             <p>Expires: {coupon.expiryDate}</p>
@@ -156,7 +156,7 @@ const ManageCoupon = () => {
             <div className="flex justify-between items-center gap-5 mt-5">
               <Link
                 to={`/dashboard/update-coupon/${coupon._id}`}
-                className="btn btn-primary"
+                className="btn btn-success"
               >
                 Edit
               </Link>

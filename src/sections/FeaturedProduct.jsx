@@ -27,8 +27,8 @@ const FeaturedProducts = () => {
 
   return (
     <section className="featured-products py-24">
-      <h2 className="text-3xl font-bold text-center mb-6">Featured Products</h2>
-      <div className="grid items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <h2 className="text-center mb-10">Featured Products</h2>
+      <div className="grid content-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {/* when fetching product */}
         {products.length === 0 && <CardSkeleton num={4} />}
 
@@ -36,7 +36,7 @@ const FeaturedProducts = () => {
         {products.map(product => (
           <div
             key={product._id}
-            className="product-card bg-white rounded-lg shadow-lg p-4"
+            className="product-card bg-base-200 rounded-lg shadow p-4"
           >
             <img
               src={product.image || 'https://placehold.co/400'}

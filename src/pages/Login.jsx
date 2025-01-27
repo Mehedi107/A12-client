@@ -33,10 +33,10 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen bg-base-300">
       <HelmetAsync title="Login"></HelmetAsync>
 
-      <div className="w-full max-w-md  m-5 p-8 rounded-lg shadow-lg ">
+      <div className="w-full max-w-md  m-5 p-8 rounded-lg shadow-lg bg-base-100">
         <h2 className="text-3xl text-center mb-6">Login</h2>
 
         <form onSubmit={handleLogin}>
@@ -48,7 +48,7 @@ const Login = () => {
               type="email"
               name="email"
               id="email"
-              className="input  w-full mt-2 input-bordered"
+              className="input w-full mt-2 input-bordered"
               placeholder="Enter your email"
               required
             />

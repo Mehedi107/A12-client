@@ -33,11 +33,10 @@ const AddProduct = () => {
       tags: formattedTags,
     };
 
-    console.log('Form Data:', formData);
-
     try {
       const res = await axiosPublic.put(`/add-product`, formData);
-      console.log(res);
+
+      // If product add successful
       if (res.data.insertedId) {
         notifySuccess('Product added successfully!');
         form.reset();
@@ -51,10 +50,8 @@ const AddProduct = () => {
   return (
     <div>
       <HelmetAsync title="Add Product" />
-      <div className="max-w-3xl mx-auto p-6 bg-base-100 shadow-lg rounded-lg mt-10">
-        <h2 className="text-2xl font-bold text-center mb-6">
-          Add a New Product
-        </h2>
+      <div className="max-w-3xl mx-auto p-4 sm:p-6 bg-base-200 shadow rounded-lg">
+        <h2 className="text-center mb-6">Add a New Product</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Product Name */}
           <div className="form-control">
@@ -68,7 +65,7 @@ const AddProduct = () => {
             />
           </div>
 
-          {/* Product Image */}
+          {/* Product Image url */}
           <div className="form-control">
             <label className="label font-semibold">Product Image URL</label>
             <input
@@ -76,6 +73,7 @@ const AddProduct = () => {
               name="productImage"
               className="input input-bordered w-full"
               required
+              placeholder="Enter image url"
             />
           </div>
 
@@ -117,14 +115,16 @@ const AddProduct = () => {
               <img
                 src={user.photoURL || 'https://via.placeholder.com/150'}
                 alt="Owner"
-                className="w-16 h-16 rounded-full"
+                className="w-12 h-12 rounded-full"
               />
             </div>
           </div>
 
           {/* Tags */}
           <div className="form-control">
-            <label className="label font-semibold">Tags</label>
+            <label className="label font-semibold">
+              Tags (Enter tags with comma)
+            </label>
             <input
               type="text"
               placeholder="Enter tags with commas"
@@ -136,19 +136,20 @@ const AddProduct = () => {
 
           {/* External Link */}
           <div className="form-control">
-            <label className="label font-semibold">External Link</label>
+            <label className="label font-semibold">
+              External Link (optional)
+            </label>
             <input
               type="url"
               placeholder="Enter external link (optional)"
               className="input input-bordered w-full"
               name="externalLink"
-              required
             />
           </div>
 
           {/* Submit Button */}
           <div className="form-control mt-4">
-            <button type="submit" className="btn btn-primary w-full">
+            <button type="submit" className="btn btn-neutral w-full">
               Submit Product
             </button>
           </div>

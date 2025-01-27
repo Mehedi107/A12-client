@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import LoadingSpinner from '../utils/LoadingSpinner';
-import { BsTriangle } from 'react-icons/bs';
+import { BsTriangleFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import { handleUpvote } from '../utils/handleUpVote';
@@ -32,10 +32,6 @@ const ProductAll = () => {
     queryFn: fetchAllProducts,
   });
 
-  // if (isLoading) {
-  //   return <LoadingSpinner />;
-  // }
-
   if (isError) {
     return <div>Error fetching products</div>;
   }
@@ -61,10 +57,10 @@ const ProductAll = () => {
   };
 
   return (
-    <div className="py-10 px-4">
+    <div className="py-10">
       <HelmetAsync title={'All Products'} />
-      <div className="flex justify-between gap-5 mb-10 items-center">
-        <h2 className="font-semibold text-3xl">All Products</h2>
+      <div className="flex flex-col sm:flex-row justify-between gap-5 mb-10 items-center">
+        <h2>All Products</h2>
         <input
           type="text"
           placeholder="Search by tags..."
@@ -81,12 +77,12 @@ const ProductAll = () => {
       )}
 
       {/* Products grid */}
-      <div className="grid items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid content-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {currentProducts.length > 0 ? (
           currentProducts.map(product => (
             <div
               key={product._id}
-              className="product-card bg-white rounded-lg shadow-lg p-4"
+              className="product-card bg-base-200 rounded-lg shadow p-4"
             >
               <img
                 src={product.image || 'https://placehold.co/400'}
@@ -108,14 +104,14 @@ const ProductAll = () => {
                       refetch
                     )
                   }
-                  className="upvote-btn flex items-center gap-2 px-4 py-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200"
+                  className="upvote-btn flex items-center gap-2 btn btn-accent  rounded"
                 >
-                  <BsTriangle />
+                  <BsTriangleFill className="text-base" />
                   {product.vote}
                 </button>
                 <button
                   onClick={() => navigate(`/product/${product._id}`)}
-                  className="details-btn px-4 py-2 rounded bg-gray-800 text-white hover:bg-gray-900"
+                  className="details-btn btn btn-neutral rounded"
                 >
                   View Details
                 </button>

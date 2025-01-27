@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import { notifyError, notifySuccess } from '../../utils/notification';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import HelmetAsync from '../../components/shared/HelmetAsync';
 
 const ManageUser = () => {
-  const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
 
   const fetchUsers = async () => {
@@ -15,12 +13,14 @@ const ManageUser = () => {
     } catch (error) {
       console.error('Error fetching users:', error.message);
       notifyError('Failed to fetch users.');
-    } finally {
-      setLoading(false);
     }
   };
 
-  const { data: users = [], refetch } = useQuery({
+  const {
+    data: users = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ['users'],
     queryFn: fetchUsers,
   });
@@ -38,17 +38,19 @@ const ManageUser = () => {
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <span className="loading loading-spinner loading-lg"></span>
       </div>
     );
   }
+
   return (
     <div className="p-6">
       <HelmetAsync title="Manage users" />
-      <h1 className="text-2xl font-semibold mb-6 text-center">Manage Users</h1>
+      <h2 className="mb-6 text-center">Manage Users</h2>
+
       <div className="overflow-x-auto">
         <table className="table-auto border-collapse w-full text-left">
           <thead>
@@ -59,37 +61,45 @@ const ManageUser = () => {
               <th className="px-4 py-2 border">Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {users.map(user => (
-              <tr key={user.email} className="hover:bg-gray-100">
-                <td className="px-4 py-2 border">{user.name || 'N/A'}</td>
-                <td className="px-4 py-2 border">{user.email}</td>
-                <td className="px-4 py-2 border capitalize">
-                  {user.role || 'user'}
-                </td>
-                <td className="px-4 py-2 border">
-                  <div className="flex gap-2">
-                    {user.role !== 'admin' && (
-                      <button
-                        onClick={() => updateRole(user.email, 'admin')}
-                        className="btn btn-sm bg-green-500 hover:bg-green-600 text-white"
-                      >
-                        Make Admin
-                      </button>
-                    )}
-                    {user.role !== 'moderator' && (
-                      <button
-                        onClick={() => updateRole(user.email, 'moderator')}
-                        className="btn btn-sm bg-blue-500 hover:bg-blue-600 text-white"
-                      >
-                        Make Moderator
-                      </button>
-                    )}
-                  </div>
-                </td>
+          {users ? (
+            <tbody>
+              {users.map(user => (
+                <tr key={user.email} className="hover:bg-gray-100">
+                  <td className="px-4 py-2 border">{user.name || 'N/A'}</td>
+                  <td className="px-4 py-2 border">{user.email}</td>
+                  <td className="px-4 py-2 border capitalize">
+                    {user.role || 'user'}
+                  </td>
+                  <td className="px-4 py-2 border">
+                    <div className="flex gap-2 flex-wrap">
+                      {user.role !== 'admin' && (
+                        <button
+                          onClick={() => updateRole(user.email, 'admin')}
+                          className="btn btn-sm bg-green-500 hover:bg-green-600 text-white"
+                        >
+                          Make Admin
+                        </button>
+                      )}
+                      {user.role !== 'moderator' && (
+                        <button
+                          onClick={() => updateRole(user.email, 'moderator')}
+                          className="btn btn-sm bg-blue-500 hover:bg-blue-600 text-white"
+                        >
+                          Make Moderator
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          ) : (
+            <tbody>
+              <tr>
+                <td>Currently no user available...</td>
               </tr>
-            ))}
-          </tbody>
+            </tbody>
+          )}
         </table>
       </div>
     </div>

@@ -40,13 +40,11 @@ const MyProfile = () => {
     }
   };
 
-  // console.log(userData);
-
   return (
     <>
       <HelmetAsync title="My Profile" />
       <div>
-        <div className="mt-20 p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md ">
+        <div className="md:mt-20 p-6 max-w-4xl mx-auto bg-base-300 rounded-lg shadow ">
           {/* User Info Section */}
           <div className="user-info text-center">
             <img
@@ -70,7 +68,7 @@ const MyProfile = () => {
             {userData?.status !== 'verified' ? (
               <button
                 onClick={handleSubscribe}
-                className="subscribe-btn w-full py-3 text-white bg-blue-500 hover:bg-blue-600 rounded-lg text-lg"
+                className="subscribe-btn w-full btn btn-neutral rounded-lg text-lg"
               >
                 Subscribe for ${subscriptionAmount}
               </button>

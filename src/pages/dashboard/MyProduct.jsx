@@ -13,7 +13,8 @@ const MyProduct = () => {
   const deleteProduct = async (productId, refetch) => {
     try {
       const res = await axiosSecure.delete(`/delete-product/${productId}`);
-      console.log(res.data);
+
+      // If delete successful
       if (res.data.deletedCount) {
         refetch();
         Swal.fire('Deleted!', 'Your product has been deleted.', 'success');
@@ -25,13 +26,8 @@ const MyProduct = () => {
   };
 
   const fetchProductByEmail = async () => {
-    try {
-      const res = await axiosSecure.get(`/my-product/${user?.email}`);
-      return res.data;
-    } catch (error) {
-      console.log(error);
-      notifyError('Something went wrong.');
-    }
+    const res = await axiosSecure.get(`/my-product/${user?.email}`);
+    return res.data;
   };
 
   const { data: products = [], refetch } = useQuery({
@@ -59,18 +55,18 @@ const MyProduct = () => {
   return (
     <div>
       <HelmetAsync title="My Product" />
-      <div className="max-w-7xl mx-auto px-4 py-10">
-        <h1 className="text-3xl font-bold text-center mb-8">My Products</h1>
-        <div className="overflow-x-auto">
-          <table className="table w-full border-2">
+      <div className="max-w-7xl mx-auto px-4 sm:py-10">
+        <h2 className="text-center mb-8">My Products</h2>
+        <div className="rounded-md">
+          <table className="table w-full border border-base-300 border-collapse text-center overflow-auto">
             {/* Table Header */}
             <thead className="bg-base-200 text-base">
               <tr>
-                <th>#</th>
-                <th>Product Name</th>
-                <th>Votes</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th className="text-center">#</th>
+                <th className="text-center">Product Name</th>
+                <th className="text-center">Votes</th>
+                <th className="text-center">Status</th>
+                <th className="text-center">Actions</th>
               </tr>
             </thead>
             {/* Table Body */}
@@ -79,11 +75,11 @@ const MyProduct = () => {
                 products.map((product, index) => (
                   <tr key={product._id} className="hover:bg-base-100">
                     <td>{index + 1}</td>
-                    <td>{product.name}</td>
-                    <td>{product.vote}</td>
-                    <td>
+                    <td className="border border-base-300">{product.name}</td>
+                    <td className="border border-base-300">{product.vote}</td>
+                    <td className="border border-base-300">
                       <span
-                        className={`font-medium capitalize badge ${
+                        className={` capitalize badge ${
                           product.status === 'accepted'
                             ? 'badge-success'
                             : product.status === 'rejected'
@@ -94,11 +90,11 @@ const MyProduct = () => {
                         {product.status}
                       </span>
                     </td>
-                    <td className="space-x-2">
+                    <td className="flex justify-center gap-3">
                       {/* Update Button */}
                       <Link
                         to={`/dashboard/update/${product._id}`}
-                        className="btn btn-sm btn-primary"
+                        className="btn btn-sm btn-info"
                       >
                         Update
                       </Link>

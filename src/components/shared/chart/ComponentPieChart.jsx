@@ -36,7 +36,7 @@ const ComponentPieChart = ({ pieData }) => {
         fill="white"
         textAnchor={x > cx ? 'start' : 'end'}
         dominantBaseline="central"
-        fontSize={12}
+        fontSize={16}
       >
         {`${(percent * 100).toFixed(0)}%`}
       </text>
@@ -44,16 +44,15 @@ const ComponentPieChart = ({ pieData }) => {
   };
 
   return (
-    <div className="chart-container ">
-      <PieChart width={400} height={400}>
+    <div className="chart-container bg-red-300">
+      <PieChart width={320} height={320}>
         <Pie
           data={data}
-          cx={200}
-          cy={200}
+          cx="50%"
+          cy="50%"
           labelLine={false}
           label={renderCustomizedLabel}
           outerRadius={100}
-          innerRadius={50}
           fill="#8884d8"
           dataKey="value"
         >
