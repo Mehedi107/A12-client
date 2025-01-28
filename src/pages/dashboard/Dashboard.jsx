@@ -134,19 +134,17 @@ const Dashboard = () => {
       </div>
 
       {/* Navigation for large device */}
-      <div className="hidden md:flex md:flex-row sm:min-h-screen transition-transform">
-        <div className="w-full md:w-1/4 p-4 bg-base-300 ">
-          <div className="flex justify-between items-start gap-4">
-            <h2 className="text-xl sm:text-2xl font-bold sm:mb-4 mb-0 py-2">
-              Dashboard
-            </h2>
-          </div>
+      <div className="hidden md:flex flex-row  transition-transform relative min-h-screen">
+        <div className="w-72 p-4 bg-base-300 min-h-screen shrink-0">
+          <h2 className="text-xl sm:text-2xl font-bold sm:mb-4 mb-0 py-2">
+            Dashboard
+          </h2>
           {/* Navigation links */}
           <ul className="hidden menu  sm:block">{navLinks}</ul>
         </div>
 
         {/* Content Area */}
-        <div className="w-full md:w-3/4 bg-white p-4">
+        <div className="grow bg-white p-4">
           <Outlet />
         </div>
       </div>

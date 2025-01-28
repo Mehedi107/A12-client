@@ -54,7 +54,7 @@ const UpdateProduct = () => {
     }
   };
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-base-100 shadow-lg rounded-lg mt-10">
+    <div className="max-w-3xl mx-auto p-6 bg-base-200 shadow rounded sm:mt-10">
       <HelmetAsync title={'Update product'} />
       <h2 className="text-2xl font-bold text-center mb-6">Update Product</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -122,7 +122,7 @@ const UpdateProduct = () => {
 
         {/* Submit Button */}
         <div className="form-control mt-4">
-          <button type="submit" className="btn btn-primary w-full">
+          <button type="submit" className="btn btn-neutral w-full">
             Update Product
           </button>
         </div>

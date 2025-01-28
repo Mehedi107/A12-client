@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAxiosPublic from './../../hooks/useAxiosPublic';
 import HelmetAsync from '../../components/shared/HelmetAsync';
+import LoadingSpinner from '../../components/shared/LoadingSpinner';
 
 const ReportedContent = () => {
   const axiosSecure = useAxiosSecure();
@@ -19,7 +20,11 @@ const ReportedContent = () => {
     }
   };
 
-  const { data: products = [], refetch } = useQuery({
+  const {
+    data: products = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ['reportedProduct'],
     queryFn: fetchReportedProduct,
   });
@@ -55,6 +60,8 @@ const ReportedContent = () => {
     });
   };
 
+  if (isLoading) return <LoadingSpinner />;
+
   return (
     <div className="w-full sm:p-6">
       <HelmetAsync title="Reported product" />
@@ -66,7 +73,7 @@ const ReportedContent = () => {
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="table w-full border border-base-300 border-collapse rounded-md text-center">
+          <table className="table w-full border border-base-300 border-collapse rounded-md text-center text-xs sm:text-sm">
             {/* Table Head */}
             <thead className="text-base bg-base-300">
               <tr>

@@ -3,11 +3,12 @@ import useAuth from '../hooks/useAuth';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import { Navigate, useLocation } from 'react-router';
 import PropTypes from 'prop-types';
+import LoadingSpinner from '../components/shared/LoadingSpinner';
 
 const AdminRoute = ({ children }) => {
   const { user } = useAuth();
   const location = useLocation();
-  const [role, setRole] = useState(null); // `null` to indicate loading state
+  const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
 
@@ -29,7 +30,7 @@ const AdminRoute = ({ children }) => {
   }, [axiosPublic, user?.email]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   if (role !== 'admin') {

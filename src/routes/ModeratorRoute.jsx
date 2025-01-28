@@ -3,6 +3,7 @@ import useAuth from '../hooks/useAuth';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import { Navigate, useLocation } from 'react-router';
 import PropTypes from 'prop-types';
+import LoadingSpinner from '../components/shared/LoadingSpinner';
 
 const ModeratorRoute = ({ children }) => {
   const { user } = useAuth();
@@ -37,7 +38,7 @@ const ModeratorRoute = ({ children }) => {
 
   // Show a loading spinner or fallback while role is being determined
   if (loading) {
-    return <div>Loading...</div>; // Replace with a spinner component if desired
+    return <LoadingSpinner />;
   }
 
   // Redirect if the user is neither a moderator nor an admin

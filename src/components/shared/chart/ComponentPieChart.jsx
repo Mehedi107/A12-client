@@ -44,8 +44,8 @@ const ComponentPieChart = ({ pieData }) => {
   };
 
   return (
-    <div className="chart-container bg-red-300">
-      <PieChart width={320} height={320}>
+    <div className="chart-container">
+      <PieChart width={300} height={300}>
         <Pie
           data={data}
           cx="50%"

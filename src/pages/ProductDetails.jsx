@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from 'react-router';
-import LoadingSpinner from '../utils/LoadingSpinner';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import { handleUpvote } from '../utils/handleUpVote';
 import useAuth from '../hooks/useAuth';
@@ -8,6 +7,7 @@ import { BsTriangleFill } from 'react-icons/bs';
 import { notifyError, notifySuccess } from '../utils/notification';
 import ReviewSlide from '../components/ReviewSlide';
 import HelmetAsync from '../components/shared/HelmetAsync';
+import LoadingSpinner from '../components/shared/LoadingSpinner';
 
 const ProductDetails = () => {
   const { user } = useAuth();
@@ -24,8 +24,6 @@ const ProductDetails = () => {
     queryKey: ['user'],
     queryFn: fetchCurrentUser,
   });
-
-  // console.log(currentUser);
 
   const fetchProductDetails = async () => {
     try {
@@ -60,9 +58,7 @@ const ProductDetails = () => {
     queryFn: fetchReviews,
   });
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  if (isLoading) return <LoadingSpinner />;
 
   if (isError) {
     return <p className="text-center text-red-500 my-5">{isError}</p>;
@@ -119,12 +115,13 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="py-16">
+    <div className="sm:py-16 py-4">
       <HelmetAsync title="Product details" />
+      <h2 className="text-center mb-10 mt-5">Product Details</h2>
       <div className="grid grid-cols-1 gap-5">
         {/* Product Details Section */}
-        <div className="flex gap-5 justify-between items-center shadow-lg p-6 rounded-md">
-          <div className="flex gap-5 items-center">
+        <div className="flex md:flex-row flex-col gap-5 md:justify-between md:items-center shadow bg-base-200 p-6 rounded">
+          <div className="flex flex-col md:flex-row gap-5 md:items-center">
             <div>
               <img
                 className="w-20"
@@ -140,7 +137,7 @@ const ProductDetails = () => {
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex md:items-center items-start flex-row md:flex-col gap-3">
             <button
               onClick={() =>
                 handleUpvote(product._id, user, navigate, axiosPublic, refetch)
@@ -158,7 +155,7 @@ const ProductDetails = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* Reviews Section */}
-          <div className="reviews shadow-lg p-6 rounded-md">
+          <div className="reviews shadow p-6 rounded bg-base-200">
             <h3 className="text-2xl font-semibold mb-5">User Reviews</h3>
             {reviews ? (
               <ReviewSlide reviews={reviews} />
@@ -171,7 +168,7 @@ const ProductDetails = () => {
           <div className="post-review">
             <form
               onSubmit={handleReviewSubmit}
-              className="mx-auto bg-white shadow-lg rounded-lg p-6 space-y-4"
+              className="mx-auto bg-base-200 shadow rounded p-6 space-y-4"
             >
               <h3 className="text-xl font-semibold text-center">
                 Post a Review
@@ -229,7 +226,7 @@ const ProductDetails = () => {
                 />
               </div>
               {/* Submit */}
-              <button type="submit" className="btn btn-primary w-full">
+              <button type="submit" className="btn btn-neutral w-full">
                 Submit
               </button>
             </form>

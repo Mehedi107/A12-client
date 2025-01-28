@@ -68,7 +68,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="navbar border-b">
+    <nav className="navbar bg-base-200 shadow">
       {/* Nav Start */}
       <div className="navbar-start">
         {/* Avatar */}

@@ -108,7 +108,7 @@ const ManageCoupon = () => {
           onChange={e =>
             setFormData({ ...formData, expiryDate: e.target.value })
           }
-          className="input input-bordered"
+          className="input input-bordered w-full"
         />
         <textarea
           placeholder="Coupon Description"

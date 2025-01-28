@@ -57,13 +57,9 @@ const Statistics = () => {
   return (
     <div>
       <HelmetAsync title="Statistics" />
-      <h2>Statistics</h2>
-      <div className="flex flex-wrap gap-5">
-        {/* Product Status */}
-        <div className="bg-white shadow-lg rounded-md p-5 w-full">
-          <h2 className="text-center">Total Products: {products.length}</h2>
-          <ComponentPieChart pieData={data} />
-        </div>
+      <div className="bg-base-200 rounded overflow-hidden shadow py-5 w-full">
+        <h2 className="text-center">Total Products: {products.length}</h2>
+        <ComponentPieChart pieData={data} />
       </div>
     </div>
   );

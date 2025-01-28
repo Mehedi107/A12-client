@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import { notifyError } from '../../utils/notification';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import LoadingSpinner from '../../components/shared/LoadingSpinner';
 
 const MyProduct = () => {
   const axiosSecure = useAxiosSecure();
@@ -30,7 +31,11 @@ const MyProduct = () => {
     return res.data;
   };
 
-  const { data: products = [], refetch } = useQuery({
+  const {
+    data: products = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ['my-products'],
     queryFn: fetchProductByEmail,
   });
@@ -52,13 +57,15 @@ const MyProduct = () => {
     });
   };
 
+  if (isLoading) return <LoadingSpinner />;
+
   return (
     <div>
       <HelmetAsync title="My Product" />
-      <div className="max-w-7xl mx-auto px-4 sm:py-10">
+      <div className="max-w-7xl mx-auto sm:px-4 sm:py-10">
         <h2 className="text-center mb-8">My Products</h2>
-        <div className="rounded-md">
-          <table className="table w-full border border-base-300 border-collapse text-center overflow-auto">
+        <div className="rounded-md overflow-x-auto">
+          <table className="table w-full border border-base-300 border-collapse text-center">
             {/* Table Header */}
             <thead className="bg-base-200 text-base">
               <tr>

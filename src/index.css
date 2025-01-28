@@ -25,3 +25,8 @@
 body {
   font-family: 'Inter', serif;
 }
+
+table .btn,
+table a {
+  @apply text-xs sm:text-sm;
+}

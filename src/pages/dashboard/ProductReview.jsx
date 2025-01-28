@@ -25,49 +25,51 @@ const ProductReview = () => {
   const handleFeatured = async id => {
     try {
       const res = await axiosPublic.patch(`/featured/${id}`);
-      console.log(res);
+
       // Updated as featured
       if (res.data.modifiedCount) {
         notifySuccess('This is featured product now!');
         refetch();
       }
 
-      // Already featured
+      // If already featured
       if (!res.data.modifiedCount) {
         notifySuccess('Already a featured product!');
         refetch();
       }
     } catch (error) {
       notifyError('Error changing product type');
-      console.log(error);
+      // console.log(error);
     }
   };
 
   const handleAccept = async id => {
     try {
       const res = await axiosPublic.patch(`/accept-product/${id}`);
-      console.log(res);
+
+      // If status changed successful
       if (res.data.modifiedCount) {
         notifySuccess('Product status has been changed!');
         refetch();
       }
     } catch (error) {
       notifyError('Error changing product status');
-      console.log(error);
+      // console.log(error);
     }
   };
 
   const handleReject = async id => {
     try {
       const res = await axiosPublic.patch(`/reject-product/${id}`);
-      console.log(res);
+
+      // If reject successful
       if (res.data.modifiedCount) {
         notifySuccess('Product status has been changed!');
         refetch();
       }
     } catch (error) {
       notifyError('Error changing product status');
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -103,7 +105,7 @@ const ProductReview = () => {
                     {product.status}
                   </span>
                 </td>
-                <td className="flex gap-3">
+                <td className="flex gap-2 flex-wrap">
                   <Link
                     to={`/product/${product._id}`}
                     className="btn btn-sm btn-info"
@@ -124,7 +126,7 @@ const ProductReview = () => {
                     Accept
                   </button>
                   <button
-                    className={`btn btn-sm btn-error `}
+                    className={`btn btn-sm btn-error`}
                     disabled={product.status === 'rejected' ? true : false}
                     onClick={() => handleReject(product._id)}
                   >

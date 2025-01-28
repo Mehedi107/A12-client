@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import useAxiosPublic from '../hooks/useAxiosPublic';
-import LoadingSpinner from '../utils/LoadingSpinner';
 import { BsTriangleFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import { handleUpvote } from '../utils/handleUpVote';
 import HelmetAsync from './../components/shared/HelmetAsync';
+import LoadingSpinner from '../components/shared/LoadingSpinner';
 
 const ProductAll = () => {
   const axiosPublic = useAxiosPublic();
@@ -70,11 +70,7 @@ const ProductAll = () => {
         />
       </div>
 
-      {isLoading && (
-        <div className="min-h-screen">
-          <LoadingSpinner />{' '}
-        </div>
-      )}
+      {isLoading && <LoadingSpinner />}
 
       {/* Products grid */}
       <div className="grid content-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

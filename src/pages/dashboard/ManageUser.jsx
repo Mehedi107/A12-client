@@ -2,6 +2,7 @@ import { notifyError, notifySuccess } from '../../utils/notification';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import HelmetAsync from '../../components/shared/HelmetAsync';
+import LoadingSpinner from '../../components/shared/LoadingSpinner';
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
@@ -38,21 +39,15 @@ const ManageUser = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <span className="loading loading-spinner loading-lg"></span>
-      </div>
-    );
-  }
+  if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="p-6">
+    <div className="sm:p-6">
       <HelmetAsync title="Manage users" />
       <h2 className="mb-6 text-center">Manage Users</h2>
 
       <div className="overflow-x-auto">
-        <table className="table-auto border-collapse w-full text-left">
+        <table className="table border-collapse w-full text-center">
           <thead>
             <tr className="bg-gray-200">
               <th className="px-4 py-2 border">Name</th>
@@ -65,12 +60,10 @@ const ManageUser = () => {
             <tbody>
               {users.map(user => (
                 <tr key={user.email} className="hover:bg-gray-100">
-                  <td className="px-4 py-2 border">{user.name || 'N/A'}</td>
-                  <td className="px-4 py-2 border">{user.email}</td>
-                  <td className="px-4 py-2 border capitalize">
-                    {user.role || 'user'}
-                  </td>
-                  <td className="px-4 py-2 border">
+                  <td className="border">{user.name || 'N/A'}</td>
+                  <td className="border">{user.email}</td>
+                  <td className="border capitalize">{user.role || 'user'}</td>
+                  <td className="border">
                     <div className="flex gap-2 flex-wrap">
                       {user.role !== 'admin' && (
                         <button
