@@ -22,3 +22,7 @@ table .btn,
 table a {
   @apply text-xs sm:text-sm;
 }
+
+.swiper-pagination-bullet-active {
+  @apply bg-neutral !important; /* Your preferred color */
+}

@@ -10,17 +10,9 @@ const AdvertiseCoupon = () => {
   const axiosSecure = useAxiosSecure();
 
   // Fetch all coupons
-  const fetchAllCoupons = async () => {
-    try {
-      const res = await axiosSecure.get('/coupons');
-      return res.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const { data: coupons = [] } = useQuery({
     queryKey: ['coupons'],
-    queryFn: fetchAllCoupons,
+    queryFn: async () => (await axiosSecure.get('/coupons')).data,
   });
 
   return (
