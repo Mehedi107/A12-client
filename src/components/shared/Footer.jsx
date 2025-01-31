@@ -1,7 +1,9 @@
+import logo from '../../assets/footer_logo.png';
+
 const Footer = () => {
   return (
     <>
-      <footer className="footer bg-base-300 text-base-content p-10">
+      <footer className="footer bg-base-200 text-base-content p-10">
         <nav>
           <h6 className="footer-title">Services</h6>
           <a className="link link-hover">Branding</a>
@@ -17,7 +19,22 @@ const Footer = () => {
           <a className="link link-hover">Press kit</a>
         </nav>
         <nav>
-          <h6 className="footer-title">Social</h6>
+          <h6 className="footer-title">Legal</h6>
+          <a className="link link-hover">Terms of use</a>
+          <a className="link link-hover">Privacy policy</a>
+          <a className="link link-hover">Cookie policy</a>
+        </nav>
+      </footer>
+      <footer className="footer bg-base-200 text-base-content border-base-300 border-t px-10 py-4">
+        <aside className="grid-flow-col items-center">
+          <img src={logo} alt="footer logo" />
+          <p>
+            <strong>ProdVent</strong>
+            <br />
+            Copyright © {new Date().getFullYear()} - All right reserved
+          </p>
+        </aside>
+        <nav className="md:place-self-center md:justify-self-end">
           <div className="grid grid-flow-col gap-4">
             <a>
               <svg
@@ -54,14 +71,6 @@ const Footer = () => {
             </a>
           </div>
         </nav>
-      </footer>
-      <footer className="footer footer-center bg-base-300 text-base-content p-4 border-t border-gray-300">
-        <aside>
-          <p>
-            Copyright © {new Date().getFullYear()} - All right reserved by
-            ProdVent
-          </p>
-        </aside>
       </footer>
     </>
   );
