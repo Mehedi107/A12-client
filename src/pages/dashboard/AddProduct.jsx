@@ -34,10 +34,10 @@ const AddProduct = () => {
     };
 
     try {
-      const res = await axiosPublic.put(`/add-product`, formData);
+      const { data } = await axiosPublic.post(`/add-product`, formData);
 
       // If product add successful
-      if (res.data.insertedId) {
+      if (data.insertedId) {
         notifySuccess('Product added successfully!');
         form.reset();
         navigate('/dashboard/my-product');

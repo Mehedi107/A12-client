@@ -25,6 +25,8 @@ const FeaturedProducts = () => {
     queryFn: fetchFeaturedProducts,
   });
 
+  console.log(products[0]?.tags);
+
   return (
     <section className="featured-products py-24">
       <h2 className="text-center mb-10">Featured Products</h2>
