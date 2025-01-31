@@ -104,7 +104,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="btn text-base border-none btn-block mt-3"
+            className="btn btn-neutral border-none btn-block mt-3"
           >
             {loading ? (
               <span className="loading loading-spinner loading-md"></span>
