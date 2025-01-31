@@ -12,15 +12,15 @@ const FeaturedProducts = () => {
   const { user } = useAuth();
 
   const fetchFeaturedProducts = async () => {
-    try {
-      const res = await axiosPublic.get('/products/feature');
-      return res.data;
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    }
+    const res = await axiosPublic.get('/products/featured');
+    return res.data;
   };
 
-  const { data: products = [], refetch } = useQuery({
+  const {
+    data: products = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ['products'],
     queryFn: fetchFeaturedProducts,
   });
@@ -30,7 +30,7 @@ const FeaturedProducts = () => {
       <h2 className="text-center mb-10">Featured Products</h2>
       <div className="grid content-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {/* when fetching product */}
-        {products.length === 0 && <CardSkeleton num={4} />}
+        {isLoading && <CardSkeleton num={4} />}
 
         {/* When product loaded successfully */}
         {products.map(product => (
