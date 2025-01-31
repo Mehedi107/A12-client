@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../hooks/useAxiosPublic';
-import { BsTriangle } from 'react-icons/bs';
+import { BsTriangle, BsTriangleFill } from 'react-icons/bs';
 import useAuth from '../hooks/useAuth';
 import { handleUpvote } from '../utils/handleUpVote';
 import CardSkeleton from '../components/shared/cardSkeleton';
@@ -12,15 +12,6 @@ const TrendingProducts = () => {
   const { user } = useAuth();
 
   // Fetch trending products from the database
-  const fetchTrendingProducts = async () => {
-    try {
-      const res = await axiosPublic.get('/trending');
-      return res.data;
-    } catch (error) {
-      console.error('Error fetching trending products:', error);
-    }
-  };
-
   const {
     data: products = [],
     isLoading,
@@ -28,45 +19,8 @@ const TrendingProducts = () => {
     refetch,
   } = useQuery({
     queryKey: ['trendingProducts'],
-    queryFn: fetchTrendingProducts,
+    queryFn: async () => (await axiosPublic.get('/trending-product')).data,
   });
-
-  // const handleUpvote = async productId => {
-  //   if (!user) {
-  //     notifyError('Please login to upvote a product');
-  //     navigate('/login');
-  //     return;
-  //   }
-
-  //   try {
-  //     const res = await axiosPublic.patch(`/product/upvote/${productId}`, {
-  //       user: user?.email,
-  //     });
-  //     if (res.data === 'already liked') {
-  //       notifyError('You have already upvoted this product');
-  //       return;
-  //     }
-
-  //     if (res.data.modifiedCount === 1) {
-  //       notifySuccess('You have successfully upvoted this product');
-  //       refetch();
-  //     }
-  //   } catch (error) {
-  //     console.error('Error upvoting product:', error);
-  //   }
-  // };
-
-  // if (isLoading) {
-  //   return <p className="text-center my-5">Loading Trending Products...</p>;
-  // }
-
-  // if (isError) {
-  //   return (
-  //     <p className="text-center text-red-500 my-5">
-  //       Failed to load trending products. Please try again later.
-  //     </p>
-  //   );
-  // }
 
   return (
     <section className="trending-products py-10">
@@ -76,7 +30,7 @@ const TrendingProducts = () => {
       {isError && <p className="text-center text-lg">No products found...</p>}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {/* While there is no product or Loading product */}
+        {/* While product is fetching */}
         {isLoading && <CardSkeleton num={3} />}
 
         {/* Display all products */}
@@ -94,8 +48,9 @@ const TrendingProducts = () => {
             <p className="text-sm text-gray-600 mt-2">
               {product.tags.join(', ')}
             </p>
-            <div className="flex items-center justify-between mt-4">
+            <div className="flex items-center justify-between mt-6">
               <button
+                disabled={product?.addedBy === user?.email}
                 onClick={() =>
                   handleUpvote(
                     product._id,
@@ -105,9 +60,13 @@ const TrendingProducts = () => {
                     refetch
                   )
                 }
-                className="upvote-btn flex items-center gap-2 btn px-6 rounded bg-blue-100 text-blue-700 hover:bg-blue-200"
+                className="btn btn-warning flex items-center gap-2"
               >
-                <BsTriangle />
+                {product.likedUsers.includes(user?.email) ? (
+                  <BsTriangleFill />
+                ) : (
+                  <BsTriangle />
+                )}
                 {product.vote}
               </button>
               <button
