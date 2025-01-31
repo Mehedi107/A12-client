@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import useAxiosPublic from '../hooks/useAxiosPublic';
-import { BsTriangle } from 'react-icons/bs';
+import { BsTriangle, BsTriangleFill } from 'react-icons/bs';
 import useAuth from '../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import { handleUpvote } from '../utils/handleUpVote';
@@ -11,21 +11,15 @@ const FeaturedProducts = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  const fetchFeaturedProducts = async () => {
-    const res = await axiosPublic.get('/products/featured');
-    return res.data;
-  };
-
+  // Fetch featured product
   const {
     data: products = [],
     isLoading,
     refetch,
   } = useQuery({
     queryKey: ['products'],
-    queryFn: fetchFeaturedProducts,
+    queryFn: async () => (await axiosPublic.get('/products/featured')).data,
   });
-
-  console.log(products[0]?.tags);
 
   return (
     <section className="featured-products py-24">
@@ -43,14 +37,20 @@ const FeaturedProducts = () => {
             <img
               src={product.image || 'https://placehold.co/400'}
               alt={product.name}
-              className="w-20 object-cover rounded-md"
+              className="w-20 h-20 object-cover rounded-md"
             />
-            <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
+            <Link
+              to="/products"
+              className="text-xl font-semibold mt-4 inline-block"
+            >
+              {product.name}
+            </Link>
             <p className="text-sm text-gray-600 mt-2">
               {product.tags.join(', ')}
             </p>
             <div className="flex items-center justify-between mt-6">
               <button
+                disabled={product?.addedBy === user?.email}
                 onClick={() =>
                   handleUpvote(
                     product._id,
@@ -60,9 +60,14 @@ const FeaturedProducts = () => {
                     refetch
                   )
                 }
-                className="upvote-btn flex items-center gap-2 px-4 py-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200"
+                className="btn btn-warning flex items-center gap-2"
               >
-                <BsTriangle />
+                {product.likedUsers.includes(user?.email) ? (
+                  <BsTriangleFill />
+                ) : (
+                  <BsTriangle />
+                )}
+
                 {product.vote}
               </button>
               <button
