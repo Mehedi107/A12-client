@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+body {
+  font-family: 'Inter', serif;
+}
+
+.chart-container .recharts-wrapper {
+  margin: 0 auto 0 auto;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,22 +16,6 @@
   h2 {
     @apply text-2xl sm:text-3xl font-semibold;
   }
-}
-
-/* a.active {
-  background-color: red !important;
-} */
-
-.chart-container .recharts-wrapper {
-  margin: 0 auto 0 auto;
-}
-
-/* .btn {
-  @apply rounded-xl;
-} */
-
-body {
-  font-family: 'Inter', serif;
 }
 
 table .btn,

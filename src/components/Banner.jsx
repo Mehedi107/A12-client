@@ -38,7 +38,7 @@ const Banner = () => {
         effect={'fade'}
         autoplay
         loop={true}
-        navigation={true}
+        // navigation={true}
         pagination={{
           clickable: true,
         }}

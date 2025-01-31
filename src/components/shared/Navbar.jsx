@@ -71,23 +71,37 @@ const Navbar = () => {
     <nav className="navbar bg-base-200 shadow">
       {/* Nav Start */}
       <div className="navbar-start">
-        {/* Avatar */}
+        {/* Login button for small device */}
         <div className="md:hidden">{userProfile}</div>
-
-        <Link to="/" className="hidden md:block text-xl">
+        {!user && (
+          <Link
+            className="md:hidden bg-neutral text-sm text-white py-2 px-4 rounded"
+            to={'login'}
+          >
+            Login
+          </Link>
+        )}
+        {/* Logo for larger device */}
+        <Link to="/" className="hidden md:block text-xl font-medium">
           ProdVent
         </Link>
       </div>
+
       {/* Nav Center */}
       <div className="navbar-center ">
+        {/* Logo for small device */}
         <Link to="/" className="md:hidden text-xl">
           ProdVent
         </Link>
-        <ul className="hidden md:flex menu menu-horizontal px-1">{navLinks}</ul>
+        {/* Nav links for large device */}
+        <ul className="hidden font-medium md:flex menu menu-horizontal px-1">
+          {navLinks}
+        </ul>
       </div>
+
       {/* Nav End */}
       <div className="navbar-end items-end">
-        {/* Avatar */}
+        {/* Avatar for large device */}
         <div className="hidden md:block">{userProfile}</div>
 
         {/* Mobile navigation */}
