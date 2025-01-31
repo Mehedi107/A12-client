@@ -13,28 +13,27 @@ const Login = () => {
   const location = useLocation();
   const redirectTo = location?.state?.from?.pathname || '/';
 
-  const handleLogin = e => {
+  const handleLogin = async e => {
     e.preventDefault();
 
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
 
-    signInUser(email, password)
+    await signInUser(email, password)
       .then(() => {
         notifySuccess('Successfully Logged In !');
         form.reset();
         navigate(redirectTo);
       })
       .catch(error => {
-        const errorMessage = error.message;
-        notifyError(errorMessage);
+        notifyError(error.message);
       });
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-base-300">
-      <HelmetAsync title="Login"></HelmetAsync>
+      <HelmetAsync title="Login" />
 
       <div className="w-full max-w-md  m-5 p-8 rounded-lg shadow-lg bg-base-100">
         <h2 className="text-3xl text-center mb-6">Login</h2>
@@ -68,7 +67,6 @@ const Login = () => {
                 onClick={() => setToggle(!toggle)}
                 className="cursor-pointer"
               >
-                {' '}
                 {toggle ? <FaEye /> : <FaEyeSlash />}
               </span>
             </label>
@@ -80,7 +78,7 @@ const Login = () => {
             </p>
           </div>
 
-          <button type="submit" className="btn text-base btn-block mt-4 ">
+          <button type="submit" className="btn btn-neutral btn-block mt-4 ">
             {loading ? (
               <span className="loading loading-spinner loading-md"></span>
             ) : (

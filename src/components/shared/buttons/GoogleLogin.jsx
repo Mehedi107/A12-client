@@ -31,7 +31,7 @@ const GoogleLogin = ({ redirectTo, label }) => {
 
   return (
     <div className="flex justify-center items-center space-x-4">
-      <button className="text-base btn btn-block" onClick={handleGoogleLogin}>
+      <button className="btn-neutral btn btn-block" onClick={handleGoogleLogin}>
         <FcGoogle className="text-2xl" />
         {label}
       </button>
