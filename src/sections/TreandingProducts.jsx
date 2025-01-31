@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import { BsTriangle, BsTriangleFill } from 'react-icons/bs';
@@ -42,9 +42,11 @@ const TrendingProducts = () => {
             <img
               src={product.image || 'https://placehold.co/400'}
               alt={product.name}
-              className="w-20 object-cover rounded-md"
+              className="w-20 h-20 object-cover rounded-md"
             />
-            <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
+            <Link to="/products" className="text-xl font-semibold mt-4">
+              {product.name}
+            </Link>
             <p className="text-sm text-gray-600 mt-2">
               {product.tags.join(', ')}
             </p>
