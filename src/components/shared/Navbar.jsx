@@ -90,7 +90,7 @@ const Navbar = () => {
       {/* Nav Center */}
       <div className="navbar-center ">
         {/* Logo for small device */}
-        <Link to="/" className="md:hidden text-xl">
+        <Link to="/" className="md:hidden font-medium text-xl">
           ProdVent
         </Link>
         {/* Nav links for large device */}
