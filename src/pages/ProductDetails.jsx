@@ -32,10 +32,12 @@ const ProductDetails = () => {
   });
 
   // Fetch reviews
-  const { data: reviews = [] } = useQuery({
+  const { data: reviews = [], refetch: reviewProductRefetch } = useQuery({
     queryKey: ['reviews', id],
     queryFn: async () => (await axiosPublic.get(`/product/${id}/reviews`)).data,
   });
+
+  console.log(reviews);
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -68,6 +70,7 @@ const ProductDetails = () => {
 
       if (res.data.insertedId) {
         notifySuccess('Review has been submitted successfully!');
+        reviewProductRefetch();
       }
 
       form.reset();
@@ -83,7 +86,7 @@ const ProductDetails = () => {
       <h2 className="text-center mb-10 mt-5">Product Details</h2>
       <div className="grid grid-cols-1 gap-5">
         {/* Product Details Section */}
-        <div className="flex lg:flex-row flex-col gap-5 md:justify-between lg:items-center shadow bg-base-200 p-6 rounded">
+        <div className="flex lg:flex-row flex-col gap-5 md:justify-between lg:items-center shadow bg-base-200 sm:p-6 p-4 rounded">
           <div className="flex flex-col lg:flex-row gap-5 lg:items-center">
             <div>
               <img
@@ -108,7 +111,7 @@ const ProductDetails = () => {
             </div>
           </div>
           {/* Action buttons */}
-          <div className="flex lg:items-center items-start flex-row lg:flex-col gap-3">
+          <div className="flex lg:items-center items-start flex-row lg:flex-col gap-3 flex-wrap">
             <BtnUpvote product={product} refetch={refetch} />
             <BtnReport product={product} refetch={refetch} />
           </div>
@@ -116,12 +119,12 @@ const ProductDetails = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* Reviews Section */}
-          <div className="reviews shadow p-6 rounded bg-base-200">
+          <div className="reviews shadow sm:p-6 p-4 rounded bg-base-200">
             <h3 className="text-2xl font-semibold mb-5">User Reviews</h3>
-            {reviews ? (
+            {reviews.length > 0 ? (
               <ReviewSlide reviews={reviews} />
             ) : (
-              'No reviews available for this product'
+              'This product has no review yet...'
             )}
           </div>
 
@@ -129,7 +132,7 @@ const ProductDetails = () => {
           <div className="post-review">
             <form
               onSubmit={handleReviewSubmit}
-              className="mx-auto bg-base-200 shadow rounded p-6 space-y-4"
+              className="mx-auto bg-base-200 shadow rounded sm:p-6 p-4 space-y-4"
             >
               <h3 className="text-xl font-semibold text-center">
                 Post a Review

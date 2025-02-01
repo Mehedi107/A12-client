@@ -6,14 +6,14 @@ import 'swiper/css/pagination';
 import 'swiper/css';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import PropTypes from 'prop-types';
+import avatar from '../assets/avatar.png';
 
 const ReviewSlide = ({ reviews }) => {
   return (
     <div>
       <Swiper
         slidesPerView={1}
-        // dir="rtl"
-        navigation={true}
+        // navigation={true}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
@@ -26,26 +26,27 @@ const ReviewSlide = ({ reviews }) => {
       >
         {reviews.map(review => (
           <SwiperSlide key={review._id}>
-            <div className="review-card flex flex-col items-center text-center gap-4 p-10 pb-20 border border-gray-200 rounded-lg shadow-lg bg-white">
+            <div className="flex flex-col items-center text-center gap-4 p-5 sm:p-10 pb-20 border border-gray-200 rounded-lg shadow bg-white">
+              {/* Reviewer Image */}
               <img
                 className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
-                src={review?.photo || 'https://placehold.co/400'}
+                src={review?.photo || avatar}
                 alt={review?.reviewerName || review?.name}
               />
+              {/* Reviewer name */}
               <h4 className="text-xl font-bold text-gray-800">
                 {review?.reviewerName || review?.name}
               </h4>
-              <p className="text-gray-600 italic">
-                {review?.reviewDescription}
-              </p>
-              <p className="font-medium text-gray-500">
-                Rating:
+              {/* Review text */}
+              <p className="text-gray-600 italic text-sm sm:text-base">{`"${review?.review}"`}</p>
+              {/* Rating */}
+              <div className="">
                 <span className="text-yellow-500 ml-1 text-2xl">
                   {Array.from({ length: review?.rating }, (_, index) => (
                     <span key={index}>★</span>
                   ))}
                 </span>
-              </p>
+              </div>
             </div>
           </SwiperSlide>
         ))}
