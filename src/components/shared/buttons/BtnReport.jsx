@@ -9,7 +9,7 @@ const BtnReport = ({ product, refetch }) => {
 
   return (
     <button
-      className="btn btn-error btn-wide"
+      className="btn btn-error"
       onClick={() => handleReport(product._id, user, axiosPublic, refetch)}
     >
       {product.reportedBy.includes(user.email) ? 'Reported' : 'Report'}

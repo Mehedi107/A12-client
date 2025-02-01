@@ -16,7 +16,7 @@ const BtnUpvote = ({ product, refetch }) => {
       onClick={() =>
         handleUpvote(product._id, user, navigate, axiosPublic, refetch)
       }
-      className="btn btn-warning flex items-center gap-2 btn-wide"
+      className={`btn btn-warning flex items-center gap-2`}
     >
       {product.likedUsers.includes(user?.email) ? (
         <BsTriangleFill />

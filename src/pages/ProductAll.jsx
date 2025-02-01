@@ -17,11 +17,6 @@ const ProductAll = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const ITEMS_PER_PAGE = 6;
 
-  const fetchAllProducts = async () => {
-    const res = await axiosPublic.get('/all-products');
-    return res.data;
-  };
-
   const {
     data: products = [],
     isLoading,
@@ -29,7 +24,7 @@ const ProductAll = () => {
     refetch,
   } = useQuery({
     queryKey: ['products'],
-    queryFn: fetchAllProducts,
+    queryFn: async () => (await axiosPublic.get('/all-products')).data,
   });
 
   if (isError) {

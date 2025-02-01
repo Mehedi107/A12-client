@@ -112,7 +112,11 @@ const ProductDetails = () => {
           </div>
           {/* Action buttons */}
           <div className="flex lg:items-center items-start flex-row lg:flex-col gap-3 flex-wrap">
-            <BtnUpvote product={product} refetch={refetch} />
+            <BtnUpvote
+              class={'btn-block'}
+              product={product}
+              refetch={refetch}
+            />
             <BtnReport product={product} refetch={refetch} />
           </div>
         </div>
@@ -120,7 +124,9 @@ const ProductDetails = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* Reviews Section */}
           <div className="reviews shadow sm:p-6 p-4 rounded bg-base-200">
-            <h3 className="text-2xl font-semibold mb-5">User Reviews</h3>
+            <h3 className="text-xl font-semibold text-center mb-5">
+              User Reviews
+            </h3>
             {reviews.length > 0 ? (
               <ReviewSlide reviews={reviews} />
             ) : (

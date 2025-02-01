@@ -26,7 +26,7 @@ const ReviewSlide = ({ reviews }) => {
       >
         {reviews.map(review => (
           <SwiperSlide key={review._id}>
-            <div className="flex flex-col items-center text-center gap-4 p-5 sm:p-10 pb-20 border border-gray-200 rounded-lg shadow bg-white">
+            <div className="flex flex-col items-center text-center gap-4 p-4 sm:p-10 pb-20 border border-gray-200 rounded-lg shadow bg-white">
               {/* Reviewer Image */}
               <img
                 className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
