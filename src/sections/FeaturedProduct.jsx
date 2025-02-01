@@ -1,15 +1,12 @@
 import { Link, useNavigate } from 'react-router';
 import useAxiosPublic from '../hooks/useAxiosPublic';
-import { BsTriangle, BsTriangleFill } from 'react-icons/bs';
-import useAuth from '../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
-import { handleUpvote } from '../utils/handleUpVote';
 import CardSkeleton from '../components/shared/cardSkeleton';
+import BtnUpvote from '../components/shared/buttons/BtnUpvote';
 
 const FeaturedProducts = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   // Fetch featured product
   const {
@@ -49,27 +46,7 @@ const FeaturedProducts = () => {
               {product.tags.join(', ')}
             </p>
             <div className="flex items-center justify-between mt-6">
-              <button
-                disabled={product?.addedBy === user?.email}
-                onClick={() =>
-                  handleUpvote(
-                    product._id,
-                    user,
-                    navigate,
-                    axiosPublic,
-                    refetch
-                  )
-                }
-                className="btn btn-warning flex items-center gap-2"
-              >
-                {product.likedUsers.includes(user?.email) ? (
-                  <BsTriangleFill />
-                ) : (
-                  <BsTriangle />
-                )}
-
-                {product.vote}
-              </button>
+              <BtnUpvote product={product} refetch={refetch} />
               <button
                 onClick={() => navigate(`/product/${product._id}`)}
                 className="details-btn px-4 py-2 rounded btn btn-neutral"
