@@ -23,7 +23,14 @@ const Register = () => {
     const email = form.email.value;
     const photo = form.photo.value;
     const password = form.password.value;
-    const formData = { name, email, photo, password, role: 'user' };
+    const formData = {
+      name,
+      email,
+      photo,
+      password,
+      role: 'user',
+      status: 'regular',
+    };
 
     try {
       verifyPassword(password);

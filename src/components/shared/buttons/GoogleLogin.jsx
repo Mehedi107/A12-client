@@ -17,6 +17,7 @@ const GoogleLogin = ({ redirectTo, label }) => {
         email: res.user.email,
         photo: res.user.photoURL,
         role: 'user',
+        status: 'regular',
       };
 
       // Save user data to database

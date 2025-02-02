@@ -1,25 +1,21 @@
 import PropTypes from 'prop-types';
 
-const Modal = ({ handlePaymentSuccess }) => {
+const Modal = () => {
   return (
     <>
-      <dialog id="my_modal_3" className="modal">
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+
+      <dialog id="my_modal_1" className="modal z-50">
         <div className="modal-box">
-          <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
-            </button>
-          </form>
-          <div className="payment-form text-center p-6">
-            <h3 className="text-2xl font-semibold mb-4">Payment Checkout</h3>
-            <p className="mb-6">You are subscribing for 49.99.</p>
-            <button
-              onClick={handlePaymentSuccess}
-              className="btn btn-neutral rounded-lg text-lg font-medium"
-            >
-              Pay Now
-            </button>
+          <h3 className="font-bold text-lg">Hello!</h3>
+          <p className="py-4">
+            Press ESC key or click the button below to close
+          </p>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn">Close</button>
+            </form>
           </div>
         </div>
       </dialog>

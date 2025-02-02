@@ -27,6 +27,8 @@ import ManageUser from './pages/dashboard/ManageUser.jsx';
 import ManageCoupon from './pages/dashboard/ManageCoupon.jsx';
 import AdminRoute from './routes/AdminRoute.jsx';
 import UpdateCoupon from './pages/dashboard/UpdateCoupon.jsx';
+import Payment from './pages/dashboard/Payment.jsx';
+// import Payment2 from './pages/dashboard/Payment2.jsx';
 
 const queryClient = new QueryClient();
 
@@ -64,6 +66,7 @@ createRoot(document.getElementById('root')).render(
                 <Route index path="my-profile" element={<MyProfile />} />
                 <Route path="add-product" element={<AddProduct />} />
                 <Route path="my-product" element={<MyProduct />} />
+                <Route path="payment" element={<Payment />} />
                 <Route
                   path="product-review"
                   element={
