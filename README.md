@@ -70,7 +70,7 @@ Ensure you have the following installed on your system:
 ### **Step 1: Clone the Repository**
 Open your terminal and run the following command to clone the project:
 ```sh
-git clone https://github.com/your-username/prodvent.git
+git clone https://github.com/Mehedi107/A12-client
 ```
 
 ### **Step 2: Navigate to the Project Directory**
