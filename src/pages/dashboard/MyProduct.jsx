@@ -21,14 +21,9 @@ const MyProduct = () => {
         Swal.fire('Deleted!', 'Your product has been deleted.', 'success');
       }
     } catch (error) {
-      console.log(error);
-      notifyError('Something went wrong.');
+      // console.log(error);
+      notifyError('Something went wrong.', error);
     }
-  };
-
-  const fetchProductByEmail = async () => {
-    const res = await axiosSecure.get(`/my-product/${user?.email}`);
-    return res.data;
   };
 
   const {
@@ -37,7 +32,8 @@ const MyProduct = () => {
     refetch,
   } = useQuery({
     queryKey: ['my-products'],
-    queryFn: fetchProductByEmail,
+    queryFn: async () =>
+      (await axiosSecure.get(`/my-product/${user?.email}`)).data,
   });
 
   const handleDelete = productId => {

@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from 'react-router';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
-import { notifyError, notifySuccess } from '../../utils/notification';
+import { notifyError } from '../../utils/notification';
 import HelmetAsync from '../../components/shared/HelmetAsync';
 import { useEffect, useState } from 'react';
+import { swalSuccess } from './../../utils/swalSuccess';
 
 const UpdateProduct = () => {
   const { id } = useParams();
@@ -18,8 +19,6 @@ const UpdateProduct = () => {
     fetchProductById();
   }, [axiosPublic, id]);
 
-  console.log(product);
-
   const handleSubmit = async e => {
     e.preventDefault();
     const form = e.target;
@@ -28,7 +27,7 @@ const UpdateProduct = () => {
     const productDescription = form.productDescription.value;
     const externalLink = form.externalLink.value;
     const tags = form.tags.value;
-    const formattedTags = tags.split(' ');
+    const formattedTags = tags.split(',');
 
     const formData = {
       productName,
@@ -38,21 +37,19 @@ const UpdateProduct = () => {
       tags: formattedTags,
     };
 
-    console.log('update', formData);
-
     try {
       const res = await axiosPublic.patch(`/update-product/${id}`, formData);
-      console.log(res);
       if (res.data.modifiedCount) {
-        notifySuccess('Product updated successfully!');
+        swalSuccess('Product updated successfully!');
         form.reset();
         navigate('/dashboard/my-product');
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       notifyError('Error adding product');
     }
   };
+
   return (
     <div className="max-w-3xl mx-auto p-6 bg-base-200 shadow rounded sm:mt-10">
       <HelmetAsync title={'Update product'} />
@@ -116,7 +113,7 @@ const UpdateProduct = () => {
             className="input input-bordered w-full"
             name="externalLink"
             required
-            defaultValue={product?.externalLinks}
+            defaultValue={product?.externalLink}
           />
         </div>
 
