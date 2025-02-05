@@ -1,8 +1,8 @@
 import HelmetAsync from '../../components/shared/HelmetAsync';
 import useAuth from '../../hooks/useAuth';
-import { notifySuccess } from '../../utils/notification';
 import useAxiosPublic from './../../hooks/useAxiosPublic';
 import { useNavigate } from 'react-router';
+import { swalSuccess } from './../../utils/swalSuccess';
 
 const AddProduct = () => {
   const { user } = useAuth();
@@ -36,9 +36,9 @@ const AddProduct = () => {
     try {
       const { data } = await axiosPublic.post(`/add-product`, formData);
 
-      // If product add successful
+      // If product added successfully
       if (data.insertedId) {
-        notifySuccess('Product added successfully!');
+        swalSuccess('Product added successfully!');
         form.reset();
         navigate('/dashboard/my-product');
       }
@@ -113,7 +113,7 @@ const AddProduct = () => {
             <div className="form-control">
               <label className="label font-semibold">Owner Image</label>
               <img
-                src={user.photoURL || 'https://via.placeholder.com/150'}
+                src={user?.photoURL || 'https://via.placeholder.com/150'}
                 alt="Owner"
                 className="w-12 h-12 rounded-full"
               />

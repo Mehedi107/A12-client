@@ -32,7 +32,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-base-300">
+    <div className="flex justify-center items-center min-h-screen bg-base-300 p-4">
       <HelmetAsync title="Login" />
 
       <div className="w-full max-w-md  m-5 p-8 rounded-lg shadow-lg bg-base-100">
