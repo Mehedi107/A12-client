@@ -56,3 +56,18 @@ ProdVent is a web platform designed to showcase and discover the latest digital 
 - **ESLint** – JavaScript and React linting (`eslint`, `@eslint/js`, `eslint-plugin-react`, `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh`)
 - **TypeScript Type Definitions** – Type support for React (`@types/react`, `@types/react-dom`)
 - **Globals** – Provides global variables for ESLint (`globals`)
+
+## Installation Guide
+
+Follow these steps to set up and run the project locally.
+
+### **Prerequisites**
+Ensure you have the following installed on your system:
+- **Node.js** (Latest LTS recommended) – [Download & Install](https://nodejs.org/)
+- **Git** – [Download & Install](https://git-scm.com/)
+- **Package Manager**: npm (comes with Node.js) or Yarn
+
+### **Step 1: Clone the Repository**
+Open your terminal and run the following command to clone the project:
+```sh
+git clone https://github.com/your-username/prodvent.git
