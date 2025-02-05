@@ -71,32 +71,36 @@ Ensure you have the following installed on your system:
 Open your terminal and run the following command to clone the project:
 ```sh
 git clone https://github.com/your-username/prodvent.git
-
 ```
-### **Step 2: Navigate to the Project Directory **
+
+### **Step 2: Navigate to the Project Directory**
 ```sh
 cd prodvent
 ```
 
-### **Step 3: Install Dependencies **
+### **Step 3: Install Dependencies**
 ```sh
 npm install
+```
 or
+```sh
 yarn install
 ```
 
-### **Step 4: Set Up Environment Variables **
+### **Step 4: Set Up Environment Variables**
 ```env
 VITE_FIREBASE_API_KEY=your_firebase_api_key
 VITE_STRIPE_PUBLIC_KEY=your_stripe_public_key
 VITE_BACKEND_URL=your_backend_url
 ```
-### **Step 5: Start the Development Server **
+
+### **Step 5: Start the Development Server**
 ```sh
 npm run dev
 or
 yarn dev
 ```
+
 ### **Step 6: Build for Production (Optional)**
 ```sh
 npm run build
@@ -105,6 +109,7 @@ or
 ```sh
 npm run preview
 ```
+
 ### **You're all set! 🎉**
 ```vbnet
 This guide follows best practices and is **formatted for easy readability in your README.md**. Let me know if you need any modifications!
