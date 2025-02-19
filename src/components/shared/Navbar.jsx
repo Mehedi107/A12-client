@@ -68,7 +68,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="navbar  backdrop-blur-sm fixed top-0 right-0 z-10 w-full">
+    <nav className="navbar bg-base-100/50 backdrop-blur-sm fixed top-0 right-0 z-10 w-full">
       {/* Nav Start */}
       <div className="navbar-start">
         {/* Login button for small device */}

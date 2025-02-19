@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import CardSkeleton from '../components/shared/cardSkeleton';
 import BtnUpvote from '../components/shared/buttons/BtnUpvote';
+import BtnDetails from '../components/shared/buttons/BtnDetails';
 
 const TrendingProducts = () => {
   const axiosPublic = useAxiosPublic();
@@ -20,7 +21,7 @@ const TrendingProducts = () => {
   });
 
   return (
-    <section className="trending-products py-10">
+    <section className="py-24 max-w-7xl mx-auto">
       <h2 className=" text-center mb-6">Trending Products</h2>
 
       {/* If no product are found */}
@@ -49,12 +50,7 @@ const TrendingProducts = () => {
             </p>
             <div className="flex items-center justify-between mt-6">
               <BtnUpvote product={product} refetch={refetch} />
-              <button
-                onClick={() => navigate(`/product/${product._id}`)}
-                className="details-btn px-4 py-2 rounded btn btn-neutral"
-              >
-                View Details
-              </button>
+              <BtnDetails id={product._id} />
             </div>
           </div>
         ))}

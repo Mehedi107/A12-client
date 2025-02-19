@@ -136,7 +136,7 @@ const Dashboard = () => {
       {/* Navigation for large device */}
       <div className="hidden md:flex flex-row  transition-transform relative min-h-screen">
         <div className="w-72 p-4 bg-base-300 min-h-screen shrink-0">
-          <h2 className="text-xl sm:text-2xl font-bold sm:mb-4 mb-0 py-2">
+          <h2 className="text-xl sm:text-2xl font-bold sm:mb-4 mb-0 py-2 text-base-content">
             Dashboard
           </h2>
           {/* Navigation links */}
@@ -144,7 +144,7 @@ const Dashboard = () => {
         </div>
 
         {/* Content Area */}
-        <div className="grow bg-white p-4">
+        <div className="grow bg-base-100 p-4">
           <Outlet />
         </div>
       </div>

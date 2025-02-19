@@ -9,6 +9,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css';
 import 'swiper/css/autoplay';
+import Lottie from 'lottie-react';
+import globe from '../assets/globe.json';
 
 const bannerSlides = [
   {
@@ -32,7 +34,7 @@ const bannerSlides = [
 
 const Banner = () => {
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <Swiper
         spaceBetween={30}
         effect={'fade'}
@@ -47,15 +49,16 @@ const Banner = () => {
       >
         {bannerSlides.map((slide, i) => (
           <SwiperSlide key={i}>
-            <div className="flex flex-col md:flex-row gap-20 justify-center  items-center bg-white dark:bg-blend-darken py-10 mt-[68px]">
+            <div className="flex flex-col md:flex-row gap-20 justify-center items-center py-10 mt-[68px] bg-base-100">
               <div className="md:w-1/2">
-                <img
+                {/* <img
                   className="h-screen object-contain max-h-[400px] mx-auto"
                   src={slide.img}
-                />
+                /> */}
+                <Lottie animationData={globe} loop={true} />
               </div>
               <div className="md:w-1/2">
-                <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold">
+                <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-neutral">
                   {slide.title}
                 </h1>
                 <p>{slide.description}</p>

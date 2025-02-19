@@ -8,6 +8,7 @@ import useAuth from '../hooks/useAuth';
 import { handleUpvote } from '../utils/handleUpVote';
 import HelmetAsync from './../components/shared/HelmetAsync';
 import LoadingSpinner from '../components/shared/LoadingSpinner';
+import { FaSort } from 'react-icons/fa';
 
 const ProductAll = () => {
   const axiosPublic = useAxiosPublic();
@@ -27,6 +28,8 @@ const ProductAll = () => {
     queryFn: async () => (await axiosPublic.get('/all-products')).data,
   });
 
+  console.log(products);
+
   if (isError) {
     return <div>Error fetching products</div>;
   }
@@ -39,7 +42,7 @@ const ProductAll = () => {
   );
 
   // Paginate filtered products
-  const pageCount = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+  const pageCount = Math.ceil(products.length / ITEMS_PER_PAGE);
   const offset = currentPage * ITEMS_PER_PAGE;
   const currentProducts = filteredProducts.slice(
     offset,
@@ -56,13 +59,18 @@ const ProductAll = () => {
       <HelmetAsync title={'All Products'} />
       <div className="flex flex-col sm:flex-row justify-between gap-5 mb-10 items-center">
         <h2>All Products</h2>
-        <input
-          type="text"
-          placeholder="Search by tags..."
-          className="input input-bordered max-w-xs md:w-full"
-          value={searchQuery}
-          onChange={e => setSearchQuery(e.target.value)}
-        />
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Search by tags..."
+            className="input input-bordered max-w-xs md:w-full"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+          />
+          {/* <button className="btn">
+            Sort <FaSort />
+          </button> */}
+        </div>
       </div>
 
       {isLoading && <LoadingSpinner />}

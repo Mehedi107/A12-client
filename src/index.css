@@ -21,9 +21,9 @@ body {
 
 table .btn,
 table a {
-  @apply text-xs sm:text-sm;
+  @apply text-xs sm:text-sm shadow-none border-none;
 }
 
 .swiper-pagination-bullet-active {
-  @apply bg-neutral !important; /* Your preferred color */
+  @apply bg-neutral !important;
 }
