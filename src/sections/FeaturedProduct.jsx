@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import useAxiosPublic from '../hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import CardSkeleton from '../components/shared/cardSkeleton';
@@ -7,7 +7,6 @@ import BtnDetails from '../components/shared/buttons/BtnDetails';
 
 const FeaturedProducts = () => {
   const axiosPublic = useAxiosPublic();
-  const navigate = useNavigate();
 
   // Fetch featured product
   const {
@@ -21,7 +20,7 @@ const FeaturedProducts = () => {
   });
 
   return (
-    <section className="bg-base-300 py-24">
+    <section className="bg-base-300 py-24 px-4">
       <div className="max-w-7xl mx-auto text-neutral">
         <h2 className="text-center mb-10 ">Featured Products</h2>
         {/* If no product are found */}

@@ -22,7 +22,7 @@ const AdvertiseCoupon = () => {
   });
 
   return (
-    <section className="py-24 bg-base-300 ">
+    <section className="py-24 bg-base-300 px-4">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center mb-6">Available Coupons</h2>
         {/* If no coupon are found */}

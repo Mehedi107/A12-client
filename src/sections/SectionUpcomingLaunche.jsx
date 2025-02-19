@@ -24,11 +24,9 @@ const SectionUpcomingLaunche = () => {
   ];
   return (
     <section className="py-24 bg-base-300">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-4">
         {/* Section Heading */}
-        <h2 className="text-3xl font-bold text-center mb-8">
-          Upcoming Launches
-        </h2>
+        <h2 className="font-bold text-center mb-8">Upcoming Launches</h2>
 
         {/* Launch Grid */}
         <div className="grid md:grid-cols-3 gap-6">

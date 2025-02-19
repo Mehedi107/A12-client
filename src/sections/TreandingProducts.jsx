@@ -21,7 +21,7 @@ const TrendingProducts = () => {
   });
 
   return (
-    <section className="py-24 max-w-7xl mx-auto">
+    <section className="py-24 px-4 max-w-7xl mx-auto">
       <h2 className=" text-center mb-6">Trending Products</h2>
 
       {/* If no product are found */}
