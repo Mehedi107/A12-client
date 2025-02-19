@@ -47,8 +47,8 @@ const SectionLatestDiscuss = () => {
         {/* Discussion List */}
         <div className="space-y-6">
           {discussions.map(discussion => (
-            <div key={discussion.id} className="join join-vertical w-full">
-              <div className="collapse collapse-arrow join-item border-base-300 border">
+            <div key={discussion.id} className="join join-vertical w-full ">
+              <div className="collapse collapse-arrow join-item border-base-300 dark:border-gray-500 border">
                 <input type="radio" name="my-accordion-4" defaultChecked />
                 <div className="collapse-title sm:text-xl font-medium ">
                   {discussion.title}

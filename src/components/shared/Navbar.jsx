@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { Link, NavLink } from 'react-router';
 import AuthContext from '../../context/AuthContext';
 import avatar from '../../assets/avatar.png';
+import logo from '../../assets/footer_logo.png';
+import { HiOutlineUserCircle } from 'react-icons/hi2';
 
 const Navbar = () => {
   const { user, signOutUser, loading } = useContext(AuthContext);
@@ -83,7 +85,7 @@ const Navbar = () => {
         )}
         {/* Logo for larger device */}
         <Link to="/" className="hidden md:block text-xl font-medium">
-          ProdVent
+          <img src={logo} alt="logo" className="h-14" />
         </Link>
       </div>
 
@@ -91,7 +93,7 @@ const Navbar = () => {
       <div className="navbar-center ">
         {/* Logo for small device */}
         <Link to="/" className="md:hidden font-medium text-xl">
-          ProdVent
+          <img src={logo} alt="logo" className="w-10" />
         </Link>
         {/* Nav links for large device */}
         <ul className="hidden font-medium md:flex menu menu-horizontal px-1">
@@ -102,6 +104,11 @@ const Navbar = () => {
       {/* Nav End */}
       <div className="navbar-end items-end">
         {/* Avatar for large device */}
+        {!user && (
+          <div className="w-10 rounded-full">
+            <HiOutlineUserCircle className="text-3xl" />
+          </div>
+        )}
         <div className="hidden md:block">{userProfile}</div>
 
         {/* Mobile navigation */}

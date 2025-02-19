@@ -47,9 +47,9 @@ const ManageUser = () => {
       <h2 className="mb-6 text-center">Manage Users</h2>
 
       <div className="overflow-x-auto">
-        <table className="table border-collapse w-full text-center">
+        <table className="table border border-collapse w-full text-center">
           <thead>
-            <tr className="bg-gray-200">
+            <tr className="bg-base-200">
               <th className="px-4 py-2 border">Name</th>
               <th className="px-4 py-2 border">Email</th>
               <th className="px-4 py-2 border">Role</th>
@@ -59,7 +59,10 @@ const ManageUser = () => {
           {users ? (
             <tbody>
               {users.map(user => (
-                <tr key={user.email} className="hover:bg-gray-100">
+                <tr
+                  key={user.email}
+                  className="hover:bg-gray-100 dark:hover:bg-base-300"
+                >
                   <td className="border">{user.name || 'N/A'}</td>
                   <td className="border">{user.email}</td>
                   <td className="border capitalize">{user.role || 'user'}</td>

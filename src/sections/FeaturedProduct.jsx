@@ -21,7 +21,7 @@ const FeaturedProducts = () => {
 
   return (
     <section className="bg-base-300 py-24 px-4">
-      <div className="max-w-7xl mx-auto text-neutral">
+      <div className="max-w-7xl mx-auto">
         <h2 className="text-center mb-10 ">Featured Products</h2>
         {/* If no product are found */}
         {isError && <p className="text-center text-lg">No products found...</p>}

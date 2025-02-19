@@ -58,7 +58,7 @@ const Banner = () => {
                 <Lottie animationData={globe} loop={true} />
               </div>
               <div className="md:w-1/2">
-                <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-neutral">
+                <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold">
                   {slide.title}
                 </h1>
                 <p>{slide.description}</p>

@@ -42,7 +42,7 @@ const MyProfile = () => {
           {/* Subscription Section */}
           <div className="subscription-section mt-8">
             {userData.status === 'verified' ? (
-              <p className="text-center bg-green-300 rounded shadow text-green-800 font-semibold py-3">
+              <p className="text-center bg-green-300 dark:bg-base-100 rounded shadow text-green-800 dark:text-base-content font-semibold py-3">
                 Verified
               </p>
             ) : (

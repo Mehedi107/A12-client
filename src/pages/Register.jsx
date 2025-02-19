@@ -55,7 +55,7 @@ const Register = () => {
     <div className="flex justify-center items-center min-h-screen p-4 bg-base-300">
       <HelmetAsync title="Register" />
 
-      <div className="w-full max-w-md m-5 p-6 rounded-lg shadow-lg bg-white">
+      <div className="w-full max-w-md m-5 p-6 rounded-lg shadow-lg bg-base-100">
         <h2 className="text-3xl text-center mb-4">Register</h2>
         <form onSubmit={handleCreateUser}>
           <div className="mb-4">
