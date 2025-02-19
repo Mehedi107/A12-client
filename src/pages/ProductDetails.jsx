@@ -69,7 +69,7 @@ const ProductDetails = () => {
       }
 
       if (res.data.insertedId) {
-        notifySuccess('Review has been submitted successfully!');
+        notifySuccess('Review has been submitted!');
         reviewProductRefetch();
       }
 
@@ -81,125 +81,129 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="sm:py-8 py-4">
-      <HelmetAsync title="Product details" />
-      <h2 className="text-center mb-10 mt-5">Product Details</h2>
-      <div className="grid grid-cols-1 gap-5">
-        {/* Product Details Section */}
-        <div className="flex lg:flex-row flex-col gap-5 md:justify-between lg:items-center shadow bg-base-200 sm:p-6 p-4 rounded">
-          <div className="flex flex-col lg:flex-row gap-5 lg:items-center">
-            <div>
-              <img
-                className="w-20 h-20 object-contain"
-                src={product.image || 'https://placehold.co/400'}
-                alt={product.name}
-              />
-            </div>
-            <div>
-              <h2 className="text-xl font-semibold mb-3">{product.name}</h2>
-              <p className="text-sm text-gray-500 mt-2">
-                {product.tags.join(', ')}
-              </p>
-              <p className="my-3">
-                <strong>Description: </strong>
-                {product.description}
-              </p>
-              <p>
-                <strong>External Link: </strong>
-                {product.externalLink}
-              </p>
-            </div>
-          </div>
-          {/* Action buttons */}
-          <div className="flex lg:items-center items-start flex-row lg:flex-col gap-3 flex-wrap">
-            <BtnUpvote
-              class={'btn-block'}
-              product={product}
-              refetch={refetch}
-            />
-            <BtnReport product={product} refetch={refetch} />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {/* Reviews Section */}
-          <div className="reviews shadow sm:p-6 p-4 rounded bg-base-200">
-            <h3 className="text-xl font-semibold text-center mb-5">
-              User Reviews
-            </h3>
-            {reviews.length > 0 ? (
-              <ReviewSlide reviews={reviews} />
-            ) : (
-              'This product has no review yet...'
-            )}
-          </div>
-
-          {/* Post Review Section */}
-          <div className="post-review">
-            <form
-              onSubmit={handleReviewSubmit}
-              className="mx-auto bg-base-200 shadow rounded sm:p-6 p-4 space-y-4"
-            >
-              <h3 className="text-xl font-semibold text-center">
-                Post a Review
-              </h3>
-              {/* Reviewer Name */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-medium">Reviewer Name</span>
-                </label>
-                <input
-                  type="text"
-                  value={user?.displayName}
-                  name="name"
-                  readOnly
-                  placeholder="Reviewer Name"
-                  className="input input-bordered w-full"
-                />
-              </div>
-              {/* Reviewer Image */}
-              <div className="form-control">
-                <label className="label font-semibold">Reviewer Image</label>
+    <div className="py-8  px-4 bg-base-300 mt-[68px]">
+      <div className="max-w-7xl mx-auto">
+        <HelmetAsync title="Product details" />
+        <h2 className="text-center mb-10 mt-5">Product Details</h2>
+        <div className="grid grid-cols-1 gap-5">
+          {/* Product Details Section */}
+          <div className="flex lg:flex-row flex-col gap-5 md:justify-between lg:items-center shadow bg-base-100 sm:p-6 p-4 rounded">
+            <div className="flex flex-col lg:flex-row gap-5 lg:items-center">
+              <div>
                 <img
-                  src={user.photoURL || 'https://via.placeholder.com/150'}
-                  alt="Owner"
-                  className="w-16 h-16 rounded-full"
+                  className="w-20 h-20 object-contain"
+                  src={product.image || 'https://placehold.co/400'}
+                  alt={product.name}
                 />
               </div>
-              {/* Review description */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-medium">
-                    Review Description
-                  </span>
-                </label>
-                <textarea
-                  placeholder="Write your review here..."
-                  className="textarea textarea-bordered"
-                  required
-                  name="description"
-                ></textarea>
+              <div>
+                <h2 className="text-xl font-semibold mb-3">{product.name}</h2>
+                <p className="text-sm text-gray-500 mt-2">
+                  {product.tags.join(', ')}
+                </p>
+                <p className="my-3">
+                  <strong>Description: </strong>
+                  {product.description}
+                </p>
+                <p>
+                  <strong>External Link: </strong>
+                  {product.externalLink}
+                </p>
               </div>
-              {/* Rating */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-medium">Rating</span>
-                </label>
-                <input
-                  type="number"
-                  name="rating"
-                  placeholder="Rating (1-5)"
-                  min="1"
-                  max="5"
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
-              {/* Submit */}
-              <button type="submit" className="btn btn-neutral w-full">
-                Submit
-              </button>
-            </form>
+            </div>
+            {/* Action buttons */}
+            <div className="flex lg:items-center items-start flex-row lg:flex-col gap-3 flex-wrap">
+              <BtnUpvote
+                class={'btn-block'}
+                product={product}
+                refetch={refetch}
+              />
+              <BtnReport product={product} refetch={refetch} />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Reviews Section */}
+            <div className="reviews shadow sm:p-6 p-4 rounded bg-base-100">
+              <h3 className="text-xl font-semibold text-center mb-5">
+                User Reviews
+              </h3>
+              {reviews.length > 0 ? (
+                <ReviewSlide reviews={reviews} />
+              ) : (
+                'This product has no review yet...'
+              )}
+            </div>
+
+            {/* Post Review Section */}
+            <div className="post-review">
+              <form
+                onSubmit={handleReviewSubmit}
+                className="mx-auto bg-base-100 shadow rounded sm:p-6 p-4 space-y-4"
+              >
+                <h3 className="text-xl font-semibold text-center">
+                  Post a Review
+                </h3>
+                {/* Reviewer Name */}
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-medium">
+                      Reviewer Name
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    value={user?.displayName}
+                    name="name"
+                    readOnly
+                    placeholder="Reviewer Name"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+                {/* Reviewer Image */}
+                <div className="form-control">
+                  <label className="label font-semibold">Reviewer Image</label>
+                  <img
+                    src={user.photoURL || 'https://via.placeholder.com/150'}
+                    alt="Owner"
+                    className="w-16 h-16 rounded-full"
+                  />
+                </div>
+                {/* Review description */}
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-medium">
+                      Review Description
+                    </span>
+                  </label>
+                  <textarea
+                    placeholder="Write your review here..."
+                    className="textarea textarea-bordered"
+                    required
+                    name="description"
+                  ></textarea>
+                </div>
+                {/* Rating */}
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text font-medium">Rating</span>
+                  </label>
+                  <input
+                    type="number"
+                    name="rating"
+                    placeholder="Rating (1-5)"
+                    min="1"
+                    max="5"
+                    className="input input-bordered w-full"
+                    required
+                  />
+                </div>
+                {/* Submit */}
+                <button type="submit" className="btn btn-neutral w-full">
+                  Submit
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
