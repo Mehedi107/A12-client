@@ -2,18 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import useAxiosPublic from '../hooks/useAxiosPublic';
-import { BsTriangleFill } from 'react-icons/bs';
-import { useNavigate } from 'react-router';
-import useAuth from '../hooks/useAuth';
-import { handleUpvote } from '../utils/handleUpVote';
 import HelmetAsync from './../components/shared/HelmetAsync';
 import LoadingSpinner from '../components/shared/LoadingSpinner';
-import { FaSort } from 'react-icons/fa';
+import BtnUpvote from '../components/shared/buttons/BtnUpvote';
+import BtnDetails from '../components/shared/buttons/BtnDetails';
 
 const ProductAll = () => {
   const axiosPublic = useAxiosPublic();
-  const navigate = useNavigate();
-  const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const ITEMS_PER_PAGE = 6;
@@ -55,90 +50,70 @@ const ProductAll = () => {
   };
 
   return (
-    <div className="py-10 mt-[68px]">
-      <HelmetAsync title={'All Products'} />
-      <div className="flex flex-col sm:flex-row justify-between gap-5 mb-10 items-center">
-        <h2>All Products</h2>
-        <div className="flex gap-2">
-          <input
-            type="text"
-            placeholder="Search by tags..."
-            className="input input-bordered max-w-xs md:w-full"
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-          />
-          {/* <button className="btn">
-            Sort <FaSort />
-          </button> */}
+    <div className="py-10 px-4 mt-[68px]">
+      <div className="max-w-7xl mx-auto">
+        <HelmetAsync title={'All Products'} />
+        <div className="flex flex-col sm:flex-row justify-between gap-5 mb-10 items-center">
+          <h2>All Products</h2>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              placeholder="Search by tags..."
+              className="input input-bordered max-w-xs md:w-full"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+            />
+          </div>
         </div>
-      </div>
 
-      {isLoading && <LoadingSpinner />}
+        {isLoading && <LoadingSpinner />}
 
-      {/* Products grid */}
-      <div className="grid content-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {currentProducts.length > 0 ? (
-          currentProducts.map(product => (
-            <div
-              key={product._id}
-              className="product-card bg-base-200 rounded-lg shadow p-4"
-            >
-              <img
-                src={product.image || 'https://placehold.co/400'}
-                alt={product.name}
-                className="w-20 rounded-md"
-              />
-              <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
-              <p className="text-sm text-gray-600 mt-2">
-                {product.tags.join(', ')}
-              </p>
-              <div className="flex items-center justify-between mt-6">
-                <button
-                  onClick={() =>
-                    handleUpvote(
-                      product._id,
-                      user,
-                      navigate,
-                      axiosPublic,
-                      refetch
-                    )
-                  }
-                  className="upvote-btn flex items-center gap-2 btn btn-accent  rounded"
-                >
-                  <BsTriangleFill className="text-base" />
-                  {product.vote}
-                </button>
-                <button
-                  onClick={() => navigate(`/product/${product._id}`)}
-                  className="details-btn btn btn-neutral rounded"
-                >
-                  View Details
-                </button>
+        {/* Products grid */}
+        <div className="grid content-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {currentProducts.length > 0 ? (
+            currentProducts.map(product => (
+              <div
+                key={product._id}
+                className="product-card bg-base-200 rounded-lg shadow p-4"
+              >
+                <img
+                  src={product.image || 'https://placehold.co/400'}
+                  alt={product.name}
+                  className="w-20 rounded-md"
+                />
+                <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
+                <p className="text-sm text-gray-600 mt-2">
+                  {product.tags.join(', ')}
+                </p>
+                <div className="flex items-center justify-between mt-6">
+                  <BtnUpvote product={product} refetch={refetch} />
+                  <BtnDetails product={product} />
+                </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <p className="text-center col-span-full text-gray-500">
-            No products match your search.
-          </p>
-        )}
-      </div>
+            ))
+          ) : (
+            <p className="text-center col-span-full text-gray-500">
+              No products match your search.
+            </p>
+          )}
+        </div>
 
-      {/* Pagination */}
-      <ReactPaginate
-        previousLabel="Previous"
-        nextLabel="Next"
-        breakLabel="..."
-        pageCount={pageCount}
-        onPageChange={handlePageClick}
-        containerClassName="pagination flex justify-center items-center mt-8 space-x-2"
-        pageClassName="page-item"
-        pageLinkClassName="px-4 py-2 border rounded hover:bg-gray-200"
-        previousLinkClassName="px-4 py-2 border rounded hover:bg-gray-200"
-        nextLinkClassName="px-4 py-2 border rounded hover:bg-gray-200"
-        activeLinkClassName="bg-gray-800 text-white"
-        disabledLinkClassName="text-gray-400 cursor-not-allowed"
-      />
+        {/* Pagination */}
+        <ReactPaginate
+          previousLabel="Previous"
+          nextLabel="Next"
+          breakLabel="..."
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
+          containerClassName="pagination flex justify-center items-center mt-8 space-x-2"
+          pageClassName="page-item"
+          pageLinkClassName="px-4 py-2 border rounded hover:bg-gray-200"
+          previousLinkClassName="px-4 py-2 border rounded hover:bg-gray-200"
+          nextLinkClassName="px-4 py-2 border rounded hover:bg-gray-200"
+          activeLinkClassName="bg-gray-800 text-white"
+          disabledLinkClassName="text-gray-400 cursor-not-allowed"
+        />
+      </div>
     </div>
   );
 };
