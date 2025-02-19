@@ -52,7 +52,7 @@ const ProductAll = () => {
   };
 
   return (
-    <div className="py-10">
+    <div className="py-10 mt-[68px]">
       <HelmetAsync title={'All Products'} />
       <div className="flex flex-col sm:flex-row justify-between gap-5 mb-10 items-center">
         <h2>All Products</h2>

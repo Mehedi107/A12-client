@@ -12,6 +12,7 @@ const FeaturedProducts = () => {
   const {
     data: products = [],
     isLoading,
+    isError,
     refetch,
   } = useQuery({
     queryKey: ['products'],
@@ -21,6 +22,8 @@ const FeaturedProducts = () => {
   return (
     <section className="featured-products py-24">
       <h2 className="text-center mb-10">Featured Products</h2>
+      {/* If no product are found */}
+      {isError && <p className="text-center text-lg">No products found...</p>}
       <div className="grid content-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {/* when fetching product */}
         {isLoading && <CardSkeleton num={4} />}
