@@ -49,7 +49,7 @@ const Banner = () => {
       >
         {bannerSlides.map((slide, i) => (
           <SwiperSlide key={i}>
-            <div className="flex flex-col md:flex-row gap-20 justify-center items-center py-10 mt-[68px] bg-base-100">
+            <div className="flex flex-col md:flex-row gap-20 justify-center items-center py-10 px-4 mt-[68px] bg-base-100">
               <div className="md:w-1/2">
                 {/* <img
                   className="h-screen object-contain max-h-[400px] mx-auto"

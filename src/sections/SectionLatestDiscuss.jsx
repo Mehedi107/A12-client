@@ -23,7 +23,7 @@ const SectionLatestDiscuss = () => {
     },
   ];
   return (
-    <section className="py-12 bg-base-100">
+    <section className="py-24 bg-base-100">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Heading */}
         <h2 className="text-3xl font-bold text-center mb-8">
